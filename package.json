@@ -14,8 +14,12 @@
   "author": "Alex Eden",
   "dependencies": {
     "core-js": "^2.5.1",
+    "hammerjs": "^2.0.8",
+    "jquery": "^3.2.1",
+    "materialize": "^1.0.0",
     "reflect-metadata": "^0.1.10",
     "vue": "^2.4.4",
+    "vue-class-component": "^5.0.2",
     "vuex": "^2.4.1",
     "vuex-typescript": "^0.1.0",
     "whatwg-fetch": "^2.0.3",

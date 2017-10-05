@@ -3,6 +3,7 @@ import * as webpack from 'webpack';
 // import * as chalk from 'chalk';
 import * as path from 'path';
 import * as CircularDependencyPlugin from 'circular-dependency-plugin';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
@@ -19,7 +20,11 @@ export const config: webpack.Configuration = {
       'zone.js/dist/zone',
       'whatwg-fetch'
     ],
-    /* Common */ vendor: [
+    /* Common */ materialize: [
+      'jquery',
+      'hammerjs',
+      './materialize/css/materialize.min.css',
+      './materialize/js/materialize.min.js'
     ],
     /* Common */ vue: [
       'vue',
@@ -39,7 +44,8 @@ export const config: webpack.Configuration = {
     extensions: ['.ts', '.js', '.html'],
     modules: ['node_modules'],
     alias: {
-      'apeden': path.resolve(__dirname, 'src/')
+      'apeden': path.resolve(__dirname, 'src/'),
+      'vue$': 'vue/dist/vue.esm.js'
     }
   },
 
@@ -56,6 +62,13 @@ export const config: webpack.Configuration = {
       {
         test: /\.html$/,
         use: 'raw-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       },
       {
         test: /\.ts$/,
@@ -84,7 +97,7 @@ export const config: webpack.Configuration = {
     }),
 
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vue', 'vendor', 'polyfills'],
+      names: ['vue', 'materialize', 'polyfills'],
       // tells Webpack we really only want what we specified in the entry
       minChunks: Infinity
     }),
@@ -95,7 +108,7 @@ export const config: webpack.Configuration = {
       chunk.name || chunk.mapModules((m: any) => path.relative(m.context, m.request)).join('_')
     ),
 
-    // new ExtractTextPlugin({ filename: '[name].css', allChunks: false }),
+    new ExtractTextPlugin({ filename: '[name].css', allChunks: false }),
     new CircularDependencyPlugin({ exclude: /node_modules/ }),
     new CleanWebpackPlugin(['deploy'])
   ]
