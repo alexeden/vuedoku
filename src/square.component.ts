@@ -31,11 +31,16 @@ export class Square {
   template: `
     <div class="input-field col s4">
       <input id="" type="text">
-      <label for="first_name">R {{row}}, C {{col}}, B {{block}}</label>
+      <label for="first_name">{{index}}</label>
     </div>
   `
 })
 export default class SquareComponent extends Vue {
+  row: number;
+  block: number;
+  col: number;
+  index = (this.row * 9) + this.col;
+
   constructor() {
     super();
   }
