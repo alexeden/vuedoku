@@ -18,7 +18,7 @@
     "jquery": "^3.2.1",
     "materialize": "^1.0.0",
     "reflect-metadata": "^0.1.10",
-    "vue": "^2.4.4",
+    "vue": "https://github.com/vuejs/vue#dev",
     "vue-class-component": "^5.0.2",
     "vuex": "^2.4.1",
     "vuex-typescript": "^0.1.0",

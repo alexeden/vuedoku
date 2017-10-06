@@ -1,7 +1,4 @@
 {
-  "rulesDirectory": [
-      "node_modules/codelyzer"
-  ],
   "rules": {
     "align": [
       true,
@@ -24,7 +21,7 @@
     "no-duplicate-variable": true,
     /*"no-empty": true,*/
     "no-input-rename": true,
-    "no-invalid-this": true,
+    "no-invalid-this": false,
     /*"no-output-rename": true,*/
     "no-shadowed-variable": true,
     "no-trailing-whitespace": true,

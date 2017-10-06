@@ -14,17 +14,15 @@ export const config: webpack.Configuration = {
 
   entry: {
     /* Common */ polyfills: [
-      'reflect-metadata',
-      'core-js/es6',
-      'core-js/es7',
-      'zone.js/dist/zone',
+      // 'core-js/es6',
+      // 'core-js/es7',
       'whatwg-fetch'
     ],
     /* Common */ materialize: [
       'jquery',
       'hammerjs',
-      './materialize/css/materialize.min.css',
-      './materialize/js/materialize.min.js'
+      './materialize/materialize.min.css',
+      './materialize/materialize.min.js'
     ],
     /* Common */ vue: [
       'vue',
