@@ -1,0 +1,25 @@
+.sudoku-cell {
+  padding: 0 10px !important;
+  margin: 0 !important;
+}
+.sudoku-cell.col-selected,
+.sudoku-cell.nonet-selected,
+.sudoku-cell.row-selected {
+  background-color: rgba(255, 0, 255, .1);
+}
+
+.sudoku-cell.selected {
+  background-color: deeppink;
+  color: white;
+  /*rgba(255, 0, 255, 1);*/
+}
+.sudoku-cell.selected input {
+  color: white;
+}
+
+.sudoku-cell input {
+  font-size: 3rem !important;
+  margin: 0 !important;
+  height: 4rem !important;
+  text-align: center !important;
+}

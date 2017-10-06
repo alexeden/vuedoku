@@ -21,14 +21,16 @@ export const config: webpack.Configuration = {
     /* Common */ materialize: [
       'jquery',
       'hammerjs',
-      './materialize/materialize.min.css',
       './materialize/materialize.min.js'
     ],
     /* Common */ vue: [
       'vue',
       'vuex'
     ],
-    // styles: './scss/main.scss',
+    styles: [
+      './styles.css',
+      './materialize/materialize.min.css'
+    ],
     app: './main.ts'
   },
 

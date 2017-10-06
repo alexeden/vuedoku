@@ -15,9 +15,16 @@ export type State = typeof initState;
 
 const updateNonet =
   (cursor: typeof initState.cursor): typeof initState.cursor => {
+    const {row, col} = cursor;
+    const colCalc = (col - col % 3)/3;
+    const rowCalc = (row - row % 3);
+    console.log(`col: ${col}, colCalc: `, colCalc);
+    console.log(`row: ${row}, rowCalc: `, rowCalc);
+    const nonet = rowCalc + colCalc;
+    console.log('nonet: ', nonet);
     return {
       ...cursor,
-      nonet: 0
+      nonet
     };
   };
 
@@ -30,6 +37,12 @@ export const storeObject: Vuex.StoreOptions<typeof initState> = {
     }
   },
   mutations: {
+    setCursor(state, {row, col}) {
+      // console.log('setCursor: ', ...args);
+      state.cursor = updateNonet({
+        ...state.cursor, col, row
+      });
+    },
     left(state) {
       const nextCol = state.cursor.col - 1;
       state.cursor = updateNonet({

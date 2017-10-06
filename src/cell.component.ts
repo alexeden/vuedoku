@@ -28,6 +28,14 @@ export const CellComponent: Vue.ComponentOptions<any> = {
         return this.nonet === nonet;
       }
     }),
+    cellCssClasses() {
+      return {
+        'row-selected': this.rowSelected,
+        'col-selected': this.colSelected,
+        'nonet-selected': this.nonetSelected,
+        'selected': this.selected
+      };
+    },
     index() {
       return (this.row * 9) + this.col;
     }
@@ -37,8 +45,16 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       'left',
       'right',
       'up',
-      'down'
+      'down',
+      'setCursor'
     ]),
+    onCellClick() {
+      this.$store.commit({
+        type: 'setCursor',
+        row: this.row,
+        col: this.col
+      });
+    },
     onkeydown(event: KeyboardEvent) {
       if (![ 49, 50, 51, 52, 53, 54, 55, 56, 57 ].includes(event.keyCode)) {
         return;
@@ -48,7 +64,10 @@ export const CellComponent: Vue.ComponentOptions<any> = {
     }
   },
   template: `
-    <div class="input-field col s4">
+    <div
+      :class="cellCssClasses"
+      @click.prevent="onCellClick"
+      class="input-field col s4 sudoku-cell">
       <input
         :id="'square-'+index"
         :value="value"
@@ -59,12 +78,12 @@ export const CellComponent: Vue.ComponentOptions<any> = {
         @keydown.down.prevent="down"
         @keydown.prevent="onkeydown"
         autocomplete="off">
-      <label :for="'square-'+index">
-        <template v-if="colSelected">C</template>
-        <template v-if="rowSelected">R</template>
-        <template v-if="nonetSelected">N</template>
-        <template v-if="selected">SELECTED</template>
-      </label>
     </div>
   `
+  // <label :for="'square-'+index">
+  //   <template v-if="colSelected">C</template>
+  //   <template v-if="rowSelected">R</template>
+  //   <template v-if="nonetSelected">N</template>
+  //   <template v-if="selected">SELECTED</template>
+  // </label>
 };
