@@ -1,22 +1,5 @@
 import Vuex from 'vuex';
-import { createGame, State } from './state';
-
-// const initState = {
-//   cursor: {
-//     col: 0,
-//     row: 0,
-//     nonet: 0
-//   }
-// };
-
-// const updateNonet =
-//   (cursor: typeof initState.cursor): typeof initState.cursor => {
-//     const {row, col} = cursor;
-//     return {
-//       ...cursor,
-//       nonet: (col - col % 3)/3 + (row - row % 3)
-//     };
-//   };
+import { createGame, State, Cell } from './state';
 
 export const storeObject: Vuex.StoreOptions<State> = {
   state: createGame([
@@ -51,48 +34,22 @@ export const storeObject: Vuex.StoreOptions<State> = {
           commit('down');
           break;
       }
-      // if ([37, 38, 39, 40].includes(e.keyCode
     }
   },
 
   getters: {
+    selectedCell({ board: {cursor, cells} }): Cell {
+      return cells.find(cell => cursor.is(cell))!;
+    },
     nonet({cursor: {row, col}}) {
       return (row - row % 3);
     }
   },
   mutations: {
-    setCursor({board}, {row, col}) {
-      board.cursor = board.cursor.set(row, col);
-    },
-    left({board}) {
-      board.cursor = board.cursor.left();
-      // const nextCol = state.cursor.col - 1;
-      // state.cursor = updateNonet({
-      //   ...state.cursor,
-      //   col: nextCol >= 0 ? nextCol : 8
-      // });
-    },
-    right({ board }) {
-      board.cursor = board.cursor.right();
-      // state.cursor = updateNonet({
-      //   ...state.cursor,
-      //   col: (state.cursor.col + 1) % 8
-      // });
-    },
-    up({ board }) {
-      board.cursor = board.cursor.up();
-      // const nextRow = state.cursor.row - 1;
-      // state.cursor = updateNonet({
-      //   ...state.cursor,
-      //   row: nextRow >= 0 ? nextRow : 8
-      // });
-    },
-    down({ board }) {
-      board.cursor = board.cursor.down();
-      // state.cursor = updateNonet({
-      //   ...state.cursor,
-      //   row: (state.cursor.row + 1) % 8
-      // });
-    }
+    setCursor: ({ board }, { row, col }) => board.cursor = board.cursor.set(row, col),
+    left: ({ board }) => board.cursor = board.cursor.left(),
+    right: ({ board }) => board.cursor = board.cursor.right(),
+    up: ({ board }) => board.cursor = board.cursor.up(),
+    down: ({ board }) => board.cursor = board.cursor.down()
   }
 };

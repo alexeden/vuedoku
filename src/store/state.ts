@@ -43,6 +43,10 @@ export class BoardCursor implements CellLocation {
     public readonly col: number
   ) {}
 
+  is(loc: CellLocation): boolean {
+    return this.index === loc.index;
+  }
+
   left(): BoardCursor {
     return BoardCursor.of(this.row, this.col - 1);
   }
