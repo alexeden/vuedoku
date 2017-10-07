@@ -12,7 +12,7 @@ export interface Cell extends Readonly<CellLocation> {
   // guesses: number[];
   // possible: number[];
   // knowable: boolean;
-  value: number;
+  value: number|null;
 }
 
 export interface Board {
@@ -75,6 +75,15 @@ export class BoardCursor implements CellLocation {
     return BoardCursor.of(row, col);
   }
 
+  toCellLocation(): CellLocation {
+    return {
+      index: this.index,
+      col: this.col,
+      row: this.row,
+      nonet: this.nonet
+    };
+  }
+
   get nonet(): number {
     return (this.col - this.col % 3)/3 + (this.row - this.row % 3);
   }
@@ -87,14 +96,17 @@ export class BoardCursor implements CellLocation {
 export const createGame =
   (values: number[]): Game => {
     // Convert each number into an object
-    const indexed = values.map(value => ({ value, locked: value !== 0 }));
+    const indexed
+      = values
+          .map(value => value !== 0 ? value : null)
+          .map(value => ({ value, locked: !!value }));
 
     // Chunk the values into rows of 9
     const rows
       = chunkify(9, indexed).map((partialCells, row) =>
           partialCells.map((cell, col): Cell => ({
             ...cell,
-            ...BoardCursor.of(row, col)
+            ...BoardCursor.of(row, col).toCellLocation()
           }))
         );
 

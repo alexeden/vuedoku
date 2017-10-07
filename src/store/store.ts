@@ -17,7 +17,7 @@ export const storeObject: Vuex.StoreOptions<State> = {
   ]),
 
   actions: {
-    handleKeyDown({commit}, e: KeyboardEvent) {
+    handleKeyDown({commit, getters}, e: KeyboardEvent) {
       console.log('handleKeyDown: ', e);
       e.preventDefault();
       switch(e.keyCode) {
@@ -33,6 +33,20 @@ export const storeObject: Vuex.StoreOptions<State> = {
         case 40:
           commit('down');
           break;
+        case 49:
+        case 50:
+        case 51:
+        case 52:
+        case 53:
+        case 54:
+        case 55:
+        case 56:
+        case 57:
+          commit('setCellValue', {
+            cell: getters.selectedCell,
+            value: +e.key
+          });
+          break;
       }
     }
   },
@@ -40,12 +54,14 @@ export const storeObject: Vuex.StoreOptions<State> = {
   getters: {
     selectedCell({ board: {cursor, cells} }): Cell {
       return cells.find(cell => cursor.is(cell))!;
-    },
-    nonet({cursor: {row, col}}) {
-      return (row - row % 3);
     }
   },
   mutations: {
+    setCellValue(state, {cell, value}: {cell: Cell, value: number}) {
+      if (!cell.locked) {
+        cell.value = value;
+      }
+    },
     setCursor: ({ board }, { row, col }) => board.cursor = board.cursor.set(row, col),
     left: ({ board }) => board.cursor = board.cursor.left(),
     right: ({ board }) => board.cursor = board.cursor.right(),

@@ -5,14 +5,16 @@ export const CellComponent: Vue.ComponentOptions<any> = {
   props: {
     row: { type: Number, required: true },
     col: { type: Number, required: true },
-    nonet: { type: Number, required: true }
+    nonet: { type: Number, required: true },
+    value: { type: Number }
   },
   data() {
     return {
-      value: null
+      // value: null
     };
   },
   computed: {
+
     ...mapState({
       selected(this: any, {cursor: {col, row}}) {
         return this.col === col && this.row === row;
@@ -41,6 +43,7 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       return (this.row * 9) + this.col;
     }
   },
+
   methods: {
     ...mapMutations([
       'left',
@@ -50,8 +53,7 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       'setCursor'
     ]),
     onCellClick() {
-      this.$el.focus();
-      console.log(window['el'] = this.$el);
+      console.log(this);
       this.$store.commit({
         type: 'setCursor',
         row: this.row,
@@ -65,7 +67,7 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       :class="cellCssClasses"
       @click="onCellClick"
       class="col s4 sudoku-cell">
-      {{value}}
+      <span class="sudoku-cell__value">{{value}}</span>
     </div>
   `
   // @keydown.right.prevent="right"
