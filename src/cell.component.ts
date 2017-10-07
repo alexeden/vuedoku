@@ -6,12 +6,8 @@ export const CellComponent: Vue.ComponentOptions<any> = {
     row: { type: Number, required: true },
     col: { type: Number, required: true },
     nonet: { type: Number, required: true },
+    locked: { type: Boolean, required: true },
     value: { type: Number }
-  },
-  data() {
-    return {
-      // value: null
-    };
   },
   computed: {
 
@@ -32,6 +28,7 @@ export const CellComponent: Vue.ComponentOptions<any> = {
     }),
     cellCssClasses() {
       return {
+        'locked': this.locked,
         'row-selected': this.rowSelected,
         'col-selected': this.colSelected,
         'nonet-selected': this.nonetSelected,
@@ -45,15 +42,8 @@ export const CellComponent: Vue.ComponentOptions<any> = {
   },
 
   methods: {
-    ...mapMutations([
-      'left',
-      'right',
-      'up',
-      'down',
-      'setCursor'
-    ]),
+    ...mapMutations([ 'setCursor' ]),
     onCellClick() {
-      console.log(this);
       this.$store.commit({
         type: 'setCursor',
         row: this.row,
@@ -66,12 +56,8 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       :id="'cell-'+index"
       :class="cellCssClasses"
       @click="onCellClick"
-      class="col s4 sudoku-cell">
+      class="sudoku-cell">
       <span class="sudoku-cell__value">{{value}}</span>
     </div>
   `
-  // @keydown.right.prevent="right"
-  // @keydown.up.prevent="up"
-  // @keydown.prevent="onkeydown"
-  // @keydown.down.prevent="down"
 };

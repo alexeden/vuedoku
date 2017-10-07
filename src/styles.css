@@ -21,7 +21,7 @@
 .board {
   width: 45rem !important;
   z-index: 0;
-  /*max-width: 38rem !important;*/
+  padding: 3rem 0;
 }
 
 .grad-bg {
@@ -37,24 +37,60 @@
 }
 
 .sudoku-cell {
-  padding: 0 !important;
+  padding: 0rem !important;
   margin: 0 !important;
+  box-sizing: border-box;
   height: 5rem;
   z-index: 1;
   border: rgba(255, 255, 255, 0.2) 1px solid !important;
-  transition: background .333s;
+  transition: background .5s, border-radius .25s .05s, border-color .25s, transform .25s .25s;
+  font-size: 3rem !important;
+  font-weight: 100;
+
+  text-align: center;
+  color: #eee;
 }
+
+.cell-wrapper {
+  padding: 0.1rem !important;
+}
+
+.sudoku-cell.selected {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 25%;
+  color: #333333;
+  border: 1px inset #333333 !important;
+  font-weight: 900 !important;
+}
+
+
+
 .sudoku-cell:hover {
+  cursor: pointer;
   border: rgba(255, 255, 255, 0.8) 1px solid !important;
-  transition: border .333s;
+  transition: border .25s;
 }
+
 .sudoku-cell.col-selected,
 .sudoku-cell.nonet-selected,
 .sudoku-cell.row-selected {
   background-color: rgba(255, 255, 255, .2);
+  border-radius: 25%;
 }
 
-.sudoku-cell.selected {
-  /*border: rgba(255, 255, 255, 0.8) 1px solid !important;*/
-  background-color: rgba(255, 255, 255, 0.8);
+
+.sudoku-cell__value {
+  display: block;
+  line-height: 4rem;
+  height: 4rem;
+  margin: 0.5rem !important;
+  width: 4rem;
+  border: none !important;
+  /*rgba(255, 255, 255, 0) 1px solid !important;*/
+  /*border-radius: 50%;*/
+  /*transition: color 1s;*/
+
+}
+.sudoku-cell.selected .sudoku-cell__value {
+  /*border: rgba(0, 0, 0, 0.8) 1px solid !important;*/
 }

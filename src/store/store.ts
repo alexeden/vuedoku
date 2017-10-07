@@ -18,7 +18,6 @@ export const storeObject: Vuex.StoreOptions<State> = {
 
   actions: {
     handleKeyDown({commit, getters}, e: KeyboardEvent) {
-      console.log('handleKeyDown: ', e);
       e.preventDefault();
       switch(e.keyCode) {
         case 37:
