@@ -18,6 +18,12 @@
   padding-right: 0 !important;
 }
 
+.board {
+  width: 45rem !important;
+  z-index: 0;
+  /*max-width: 38rem !important;*/
+}
+
 .grad-bg {
   position: fixed;
   top: 0;
@@ -33,9 +39,10 @@
 .sudoku-cell {
   padding: 0 !important;
   margin: 0 !important;
-  height: 4rem;
+  height: 5rem;
+  z-index: 1;
   border: rgba(255, 255, 255, 0.2) 1px solid !important;
-  transition: background .5s;
+  transition: background .333s;
 }
 .sudoku-cell:hover {
   border: rgba(255, 255, 255, 0.8) 1px solid !important;

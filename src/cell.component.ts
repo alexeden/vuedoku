@@ -50,34 +50,26 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       'setCursor'
     ]),
     onCellClick() {
+      this.$el.focus();
+      console.log(window['el'] = this.$el);
       this.$store.commit({
         type: 'setCursor',
         row: this.row,
         col: this.col
       });
-    },
-    onkeydown(event: KeyboardEvent) {
-      console.log(event);
-
-      if (![ 49, 50, 51, 52, 53, 54, 55, 56, 57 ].includes(event.keyCode)) {
-        return;
-      }
-      // const { target }: { target: HTMLInputElement } = event;
-      this.value = +event.key;
     }
   },
   template: `
     <div
       :id="'cell-'+index"
       :class="cellCssClasses"
-      @click.prevent="onCellClick"
-      @keydown.left.prevent="left"
-      @keydown.right.prevent="right"
-      @keydown.up.prevent="up"
-      @keydown.prevent="onkeydown"
-      @keydown.down.prevent="down"
+      @click="onCellClick"
       class="col s4 sudoku-cell">
       {{value}}
     </div>
   `
+  // @keydown.right.prevent="right"
+  // @keydown.up.prevent="up"
+  // @keydown.prevent="onkeydown"
+  // @keydown.down.prevent="down"
 };
