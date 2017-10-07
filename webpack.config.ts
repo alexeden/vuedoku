@@ -31,7 +31,7 @@ export const config: webpack.Configuration = {
       './styles.css',
       './materialize/materialize.min.css'
     ],
-    app: './main.ts'
+    app: './app.ts'
   },
 
   output: {

@@ -1,25 +1,53 @@
+.my-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.grad-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background: #7f00ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(35deg, #7f00ff, #e100ff 90%); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(35deg, #7f00ff, #e100ff 90%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 .sudoku-cell {
-  padding: 0 10px !important;
+  padding: 0 !important;
   margin: 0 !important;
+  height: 4rem;
+  border: rgba(255, 255, 255, 0.2) 1px solid !important;
+  transition: background .5s;
+}
+.sudoku-cell:hover {
+  border: rgba(255, 255, 255, 0.8) 1px solid !important;
+  transition: border .333s;
 }
 .sudoku-cell.col-selected,
 .sudoku-cell.nonet-selected,
 .sudoku-cell.row-selected {
-  background-color: rgba(255, 0, 255, .1);
+  background-color: rgba(255, 255, 255, .2);
 }
 
 .sudoku-cell.selected {
-  background-color: deeppink;
-  color: white;
-  /*rgba(255, 0, 255, 1);*/
-}
-.sudoku-cell.selected input {
-  color: white;
-}
-
-.sudoku-cell input {
-  font-size: 3rem !important;
-  margin: 0 !important;
-  height: 4rem !important;
-  text-align: center !important;
+  /*border: rgba(255, 255, 255, 0.8) 1px solid !important;*/
+  background-color: rgba(255, 255, 255, 0.8);
 }

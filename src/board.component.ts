@@ -12,31 +12,24 @@ export const BoardComponent: Vue.ComponentOptions<any> = {
   data() {
     return {
       board: [
-        0, 0, 0,  0, 0, 0,  0, 0, 0,
-        0, 0, 0,  0, 0, 0,  0, 0, 0,
-        0, 0, 0,  0, 0, 0,  0, 0, 0,
+        0, 8, 4,  0, 0, 3,  9, 0, 0,
+        0, 7, 0,  5, 1, 0,  0, 4, 8,
+        5, 0, 0,  0, 0, 0,  0, 0, 2,
 
-        0, 0, 0,  0, 0, 0,  0, 0, 0,
-        0, 0, 0,  0, 0, 0,  0, 0, 0,
-        0, 0, 0,  0, 0, 0,  0, 0, 0,
+        3, 0, 0,  0, 9, 0,  0, 2, 0,
+        0, 4, 0,  6, 0, 1,  0, 9, 0,
+        0, 1, 0,  0, 4, 0,  0, 0, 5,
 
-        0, 0, 0,  0, 0, 0,  0, 0, 0,
-        0, 0, 0,  0, 0, 0,  0, 0, 0,
-        0, 0, 0,  0, 0, 0,  0, 0, 0
+        6, 0, 0,  0, 0, 0,  0, 0, 1,
+        4, 2, 0,  0, 7, 6,  0, 3, 0,
+        0, 0, 3,  1, 0, 0,  4, 8, 0
       ]
     };
   },
 
-  // computed: {
-  //   ...mapState<State>({
-  //     x: state => state.x,
-  //     y: state => state.y
-  //   })
-  // },
-
   template: `
-    <form class="row">
-      <div v-for="(row, rowIndex) in chunkify(9, board)" class="row">
+    <div class="container">
+      <div v-for="(row, rowIndex) in chunkify(9, board)" class="row my-0 py-0">
         <div v-for="(block, subBlockIndex) in chunkify(3, row)" class="col s4">
           <div v-for="(square, squareIndex) in block">
             <cell
@@ -47,7 +40,7 @@ export const BoardComponent: Vue.ComponentOptions<any> = {
           </div>
         </div>
       </div>
-    </form>
+    </div>
   `,
 
   methods: {
