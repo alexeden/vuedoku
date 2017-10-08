@@ -8,6 +8,7 @@ Features to add:
 - [x] Press a number to set a cell's value
 - [x] Prevent setting a locked cell
 - [x] Basic cell styling
+- [ ] Press tab to go right, shift-tab to go left
 - [ ] Add a border between the board's nonets
 - [ ] Stylize the locked cells
 - [ ] Press backspace or delete to clear a cell
