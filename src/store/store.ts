@@ -18,7 +18,9 @@ export const storeObject: Vuex.StoreOptions<State> = {
 
   actions: {
     handleKeyDown({commit, getters}, e: KeyboardEvent) {
+      if (e.metaKey) return;
       e.preventDefault();
+
       switch(e.keyCode) {
         case 37:
           commit('left');
@@ -46,6 +48,13 @@ export const storeObject: Vuex.StoreOptions<State> = {
             value: +e.key
           });
           break;
+        case 8:
+        case 46:
+          commit('setCellValue', {
+            cell: getters.selectedCell,
+            value: null
+          });
+          break;
       }
     }
   },
@@ -57,9 +66,9 @@ export const storeObject: Vuex.StoreOptions<State> = {
   },
   mutations: {
     setCellValue(state, {cell, value}: {cell: Cell, value: number}) {
-      if (!cell.locked) {
-        cell.value = value;
-      }
+      if (cell.locked) return;
+
+      cell.value = cell.value === value ? null : value;
     },
     setCursor: ({ board }, { row, col }) => board.cursor = board.cursor.set(row, col),
     left: ({ board }) => board.cursor = board.cursor.left(),
