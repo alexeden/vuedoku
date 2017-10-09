@@ -13,6 +13,12 @@ const app = new Vue({
     }
   },
   store,
+  mounted() {
+    this.$el.parentElement!.addEventListener(
+      'keydown',
+      this.$store.dispatch.bind(this, 'handleKeyDown')
+    );
+  },
   components: {
     board: BoardComponent
   },

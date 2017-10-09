@@ -12,8 +12,8 @@ Features to add:
 - [ ] Add a border between the board's nonets
 - [ ] Stylize the locked cells
 - [x] Press backspace or delete to clear a cell
-- [ ] Track each cell's remaining possible values
-- [ ] Indicate when a cell has incorrect value
+- [x] Track each cell's remaining possible values
+- [x] Indicate when a cell has incorrect value
 - [x] Do not allow clearing of locked cell
 - [ ] Make incorrect value highlighting a user setting
 - [ ] Highlight all values of the matching selected cell value

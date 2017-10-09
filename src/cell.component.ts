@@ -23,7 +23,6 @@ export const CellComponent: Vue.ComponentOptions<any> = {
         return this.col === col;
       },
       nonetSelected(this: any, {cursor: {nonet}}) {
-        //  ...args: any[]) {
         return this.nonet === nonet;
       }
     }),
@@ -36,13 +35,18 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       return this.possibleCellValueFinder(this);
     },
 
+    hasImpossibleValue() {
+      return this.$store.getters.impossibleValues(this).includes(this.value);
+    },
+
     cellCssClasses() {
       return {
-        'locked': this.locked,
-        'row-selected': this.rowSelected,
-        'col-selected': this.colSelected,
-        'nonet-selected': this.nonetSelected,
-        'selected': this.selected
+        'sudoku-cell--locked': this.locked,
+        'sudoku-cell--row-selected': this.rowSelected,
+        'sudoku-cell--col-selected': this.colSelected,
+        'sudoku-cell--nonet-selected': this.nonetSelected,
+        'sudoku-cell--selected': this.selected,
+        'sudoku-cell--impossible': this.hasImpossibleValue
       };
     },
 
@@ -71,12 +75,11 @@ export const CellComponent: Vue.ComponentOptions<any> = {
   },
   template: `
     <div
-      :id="'cell-'+index"
       :class="cellCssClasses"
       @click="onCellClick"
       class="sudoku-cell">
       <span class="sudoku-cell__value">{{value}}</span>
-      <span class="sudoku-cell__guess">{{possibleCellValues | join('  ')}}</span>
     </div>
   `
+  // <span class="sudoku-cell__guess">{{possibleCellValues | join('  ')}}</span>
 };
