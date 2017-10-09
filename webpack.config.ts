@@ -13,23 +13,13 @@ export const config: webpack.Configuration = {
   devtool: 'cheap-module-eval-source-map',
 
   entry: {
-    /* Common */ polyfills: [
-      // 'core-js/es6',
-      // 'core-js/es7',
-      'whatwg-fetch'
-    ],
-    /* Common */ materialize: [
-      'jquery',
-      'hammerjs',
-      './materialize/materialize.min.js'
-    ],
     /* Common */ vue: [
       'vue',
       'vuex'
     ],
     styles: [
-      './styles.css',
-      './materialize/materialize.min.css'
+      './scss/styles.scss',
+      './scss/materialize.scss'
     ],
     app: './app.ts'
   },
@@ -64,11 +54,23 @@ export const config: webpack.Configuration = {
         use: 'raw-loader'
       },
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        /* Core SCSS files inside /src/scss */
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'postcss-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [
+                  path.resolve(__dirname, 'node_modules', 'materialize-css')
+                ]
+              }
+            }
+          ]
+        })
       },
       {
         test: /\.ts$/,
@@ -97,7 +99,7 @@ export const config: webpack.Configuration = {
     }),
 
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vue', 'materialize', 'polyfills'],
+      names: ['vue'],
       // tells Webpack we really only want what we specified in the entry
       minChunks: Infinity
     }),
