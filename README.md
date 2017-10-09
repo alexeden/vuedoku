@@ -8,13 +8,13 @@ Features to add:
 - [x] Press a number to set a cell's value
 - [x] Prevent setting a locked cell
 - [x] Basic cell styling
-- [ ] Press tab to go right, shift-tab to go left
+- [x] Press tab to go right, shift-tab to go left
 - [ ] Add a border between the board's nonets
 - [ ] Stylize the locked cells
-- [ ] Press backspace or delete to clear a cell
+- [x] Press backspace or delete to clear a cell
 - [ ] Track each cell's remaining possible values
 - [ ] Indicate when a cell has incorrect value
-- [ ] Do not allow clearing of locked cell
+- [x] Do not allow clearing of locked cell
 - [ ] Make incorrect value highlighting a user setting
 - [ ] Highlight all values of the matching selected cell value
 - [ ] Make matching value highlighting a user setting

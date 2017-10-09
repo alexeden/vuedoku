@@ -40,6 +40,7 @@
   padding: 0rem !important;
   margin: 0 !important;
   box-sizing: border-box;
+  position: relative;
   height: 5rem;
   z-index: 1;
   border: rgba(255, 255, 255, 0.2) 1px solid !important;
@@ -79,6 +80,15 @@
 }
 
 
+.sudoku-cell__guess {
+  position: absolute;
+  line-height: 1rem;
+  font-size: .2em !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 .sudoku-cell__value {
   display: block;
   line-height: 4rem;
@@ -89,8 +99,8 @@
   /*rgba(255, 255, 255, 0) 1px solid !important;*/
   /*border-radius: 50%;*/
   /*transition: color 1s;*/
-
 }
+
 .sudoku-cell.selected .sudoku-cell__value {
   /*border: rgba(0, 0, 0, 0.8) 1px solid !important;*/
 }

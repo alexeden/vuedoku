@@ -1,5 +1,7 @@
 import Vuex from 'vuex';
-import { createGame, State, Cell } from './state';
+import { Cell } from './core';
+import { createGame, State } from './state';
+import { getters as rootGetters } from './getters';
 
 export const storeObject: Vuex.StoreOptions<State> = {
   state: createGame([
@@ -63,11 +65,7 @@ export const storeObject: Vuex.StoreOptions<State> = {
     }
   },
 
-  getters: {
-    selectedCell({ board: {cursor, cells} }): Cell {
-      return cells.find(cell => cursor.is(cell))!;
-    }
-  },
+  getters: rootGetters,
   mutations: {
     setCellValue(state, {cell, value}: {cell: Cell, value: number}) {
       if (cell.locked) return;

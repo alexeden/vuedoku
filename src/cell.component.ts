@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState, mapGetters } from 'vuex';
+import {} from './store';
 
 export const CellComponent: Vue.ComponentOptions<any> = {
   props: {
@@ -26,6 +27,15 @@ export const CellComponent: Vue.ComponentOptions<any> = {
         return this.nonet === nonet;
       }
     }),
+
+    ...mapGetters({
+      possibleCellValueFinder: 'possibleCellValues'
+    }),
+
+    possibleCellValues() {
+      return this.possibleCellValueFinder(this);
+    },
+
     cellCssClasses() {
       return {
         'locked': this.locked,
@@ -38,6 +48,14 @@ export const CellComponent: Vue.ComponentOptions<any> = {
 
     index() {
       return (this.row * 9) + this.col;
+    }
+  },
+  filters: {
+    join<T>(list: T[], separator = ' '): string {
+      if (!Array.isArray(list)) {
+        throw new Error(`The "join" filter expects data to be an Array!`);
+      }
+      return list.join(separator);
     }
   },
 
@@ -58,6 +76,7 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       @click="onCellClick"
       class="sudoku-cell">
       <span class="sudoku-cell__value">{{value}}</span>
+      <span class="sudoku-cell__guess">{{possibleCellValues | join('  ')}}</span>
     </div>
   `
 };
