@@ -72,7 +72,7 @@ export const CellComponent: Vue.ComponentOptions<any> = {
     <div
       :class="cellCssClasses"
       @click="onCellClick"
-      class="sudoku-cell">
+      class="sudoku-cell self-center">
       {{value}}
     </div>
   `

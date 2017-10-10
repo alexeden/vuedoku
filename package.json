@@ -13,6 +13,7 @@
   },
   "author": "Alex Eden",
   "dependencies": {
+    "basscss": "^8.0.3",
     "materialize-css": "^0.100.2",
     "vue": "https://github.com/vuejs/vue#dev",
     "vue-class-component": "^5.0.2",

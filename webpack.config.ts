@@ -18,6 +18,7 @@ export const config: webpack.Configuration = {
       'vuex'
     ],
     styles: [
+      'basscss/css/basscss.css',
       './scss/styles.scss'
     ],
     app: './app.ts'
@@ -30,7 +31,7 @@ export const config: webpack.Configuration = {
   },
 
   resolve: {
-    extensions: ['.ts', '.js', '.html'],
+    extensions: ['.ts', '.js', '.html', '.css'],
     modules: ['node_modules'],
     alias: {
       'sudoku': path.resolve(__dirname, 'src/'),
@@ -54,7 +55,7 @@ export const config: webpack.Configuration = {
       },
       {
         /* Core SCSS files inside /src/scss */
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
