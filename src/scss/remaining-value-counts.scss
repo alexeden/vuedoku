@@ -4,14 +4,18 @@
   font-weight: 100;
   font-size: 1.2rem;
 
-  &__line, p {
+  &-line, p {
     line-height: 1.5rem;
     padding: 1rem 2rem;
     margin: 0;
   }
 
-  &__line {
+  &-line {
     border-bottom: 1px solid rgba(white, 0.2);
+
+    &__value {
+    }
+
 
     &--matches-selected {
       color: $cell-selected-font-color;
@@ -19,6 +23,11 @@
       background-color: $related-selected-background-color;
       border-bottom: none;
 
+    }
+    &--complete {
+      color: #2BCA4F;
+
+      font-weight: $cell-selected-font-weight;
     }
   }
 }
