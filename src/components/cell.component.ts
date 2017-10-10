@@ -46,6 +46,8 @@ export const CellComponent: Vue.ComponentOptions<any> = {
         'sudoku-cell--col-selected': this.colSelected,
         'sudoku-cell--nonet-selected': this.nonetSelected,
         'sudoku-cell--selected': this.selected,
+        'z-depth-3': this.selected,
+        'z-depth-1': !this.selected && (this.rowSelected || this.colSelected || this.nonetSelected),
         'sudoku-cell--impossible': this.hasImpossibleValue,
         'sudoku-cell--matches-selected': this.$store.getters.selectedCell.value === this.value
       };
@@ -53,14 +55,6 @@ export const CellComponent: Vue.ComponentOptions<any> = {
 
     index() {
       return (this.row * 9) + this.col;
-    }
-  },
-  filters: {
-    join<T>(list: T[], separator = ' '): string {
-      if (!Array.isArray(list)) {
-        throw new Error(`The "join" filter expects data to be an Array!`);
-      }
-      return list.join(separator);
     }
   },
 

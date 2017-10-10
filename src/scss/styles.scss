@@ -7,12 +7,12 @@ $cell-error-color: #E53935;
 $cell-height: 5rem;
 $cell-padding: 0.2rem;
 $cell-font-size: 2rem;
-$cell-font-color: #eee;
-$cell-font-weight: 300;
+$cell-font-color: #fff;
+$cell-font-weight: 100;
 $cell-selected-font-weight: 900;
 $cell-selected-background-color: rgba(white, 0.8);
 $cell-border-color: rgba(255, 255, 255, 0.2);
-$cell-selected-border-radius: 10%;
+$cell-selected-border-radius: 0%;
 $related-selected-background-color: rgba(white, 0.2);
 $cell-selected-font-color: #333;
 $cell-width: percentage(1/$num-cols);
@@ -65,7 +65,7 @@ $cell-width: percentage(1/$num-cols);
   height: 100%;
   line-height: $cell-height;
   text-align: center;
-  transition: background .5s, border-radius .25s .05s, border-color .25s, transform .25s .25s;
+  transition: background .5s, border-radius .25s .05s, box-shadow .333s, border-color .25s, transform .25s .25s;
   z-index: 1;
 
   &:hover {
@@ -76,12 +76,13 @@ $cell-width: percentage(1/$num-cols);
     background-color: $cell-selected-background-color !important;
     border-radius: $cell-selected-border-radius;
     color: $cell-selected-font-color;
-    border: 1px inset $cell-selected-font-color !important;
+    // border: 1px inset $cell-selected-font-color !important;
     font-weight: $cell-selected-font-weight !important;
   }
 
   &--matches-selected {
     color: $cell-selected-font-color;
+    // border: none;
   }
 
   &--col-selected,
@@ -94,7 +95,7 @@ $cell-width: percentage(1/$num-cols);
 
   &--locked {
     // background-color: $cell-selected-background-color !important;
-    border-radius: 50%;
+    // border-radius: 50%;
     // color: $cell-selected-font-color !important;
   }
 
