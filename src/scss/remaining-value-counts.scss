@@ -1,0 +1,21 @@
+.remaining-value-counts {
+
+  color: white;
+  font-weight: 100;
+
+  &__line, p {
+    line-height: 1.5rem;
+    padding: 1rem 2rem;
+    margin: 0;
+  }
+
+  &__line {
+    border-bottom: 1px solid rgba(white, 0.2);
+
+    &--matches-selected {
+      color: $cell-selected-font-color;
+      font-weight: $cell-selected-font-weight;
+
+    }
+  }
+}

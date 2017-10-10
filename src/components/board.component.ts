@@ -5,7 +5,6 @@ import { Cell } from 'sudoku/lib';
 import { CellComponent } from './cell.component';
 
 interface BoardComponent extends Vue {
-  chunkify<T>(size: number, list: T[]): T[][];
   cells: Cell[];
 }
 
@@ -28,7 +27,7 @@ export const BoardComponent: Vue.ComponentOptions<BoardComponent> = {
           <cell :cell="cell" v-bind="cell"/>
         </div>
       </div>
-    </div>
+  </div>
   `,
   computed: {
     ...mapState({
@@ -49,13 +48,6 @@ export const BoardComponent: Vue.ComponentOptions<BoardComponent> = {
       return Object.keys(indexedNonets)
         .sort()
         .map(index => indexedNonets[index]);
-    }
-  },
-  methods: {
-    chunkify<T>(this: BoardComponent, size: number, list: T[]): T[][] {
-      return list.length > 0
-        ? [ list.slice(0, size), ...this.chunkify(size, list.slice(size))]
-        : [ list ];
     }
   }
 };

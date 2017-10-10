@@ -4,11 +4,9 @@
 $quicksand-font-path: "./quicksand";
 $lato-font-path: "./lato";
 $primary-font-family: "Lato";
-// @import "quicksand";
 @import "lato";
 @import "materialize";
 @import "typography";
-
 
 $num-cols: 9;
 $cell-error-color: #E53935;
@@ -25,6 +23,8 @@ $nonet-border-color: rgba(white, 0.6);
 $nonet-padding: 0.5rem;
 $related-selected-background-color: rgba(white, 0.2);
 $cell-selected-font-color: #333;
+
+@import "remaining-value-counts";
 
 
 .sudoku-board {
@@ -55,7 +55,7 @@ $cell-selected-font-color: #333;
   font-size: $cell-font-size;
   font-weight: $cell-font-weight;
   height: 100%;
-  line-height: 75px;
+  line-height: 50px;
   text-align: center;
   transition: background .5s, border-radius .25s .05s, box-shadow .333s, border-color .25s, transform .25s .25s;
   z-index: 1;
@@ -81,7 +81,6 @@ $cell-selected-font-color: #333;
   &--row-selected {
     background-color: $related-selected-background-color;
     border-color: transparent;
-    // border-radius: $cell-selected-border-radius;
   }
 
 

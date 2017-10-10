@@ -19,7 +19,6 @@ export const getters: GetterTree<State, State> = {
           .filter(c => typeof c.value === 'number')
           .map(c => c.value as number)
       ])),
-  // collidesWithSelectedCell: (state, {selectedCell})
   hasImpossibleValue: (state, {impossibleValues}) =>
     (cell: Cell): boolean =>
       impossibleValues(cell).includes(cell.value),
@@ -28,8 +27,10 @@ export const getters: GetterTree<State, State> = {
       [1, 2, 3, 4, 5, 6, 7, 8, 9].filter(value =>
         !impossibleValues(cell).includes(value)
       ),
+  totalRemainingValues: ({board: {cells}}) =>
+    cells.reduce((count, cell) => count - (!!cell.value ? 1 : 0), 81),
+
   remainingValueCounts: ({board: {cells}}): {[value: number]: number} => {
-    // (value: number): {[value: number]: number} =>
     const counts = [1, 2, 3, 4, 5, 6, 7, 8, 9].reduce((obj, value) => ({ ...obj, [value]: 9 }), {});
 
     cells
@@ -37,5 +38,8 @@ export const getters: GetterTree<State, State> = {
       .map(cell => counts[cell.value as number]--);
 
     return counts;
-  }
+  },
+  remaingValueOf: ({board: {cells}}) =>
+    (value: number): number =>
+      cells.reduce((count, cell) => count - (cell.value === value ? 1 : 0), 9)
 };

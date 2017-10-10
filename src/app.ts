@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { store } from './store';
-import { BoardComponent, CellsRemainingComponent } from './components';
+import { BoardComponent, RemainingValueCountsComponent } from './components';
 
 Vue.filter('join', <T>(list: T[], separator = ' '): string => {
   if (!Array.isArray(list)) {
@@ -28,16 +28,17 @@ const app = new Vue({
   },
   components: {
     board: BoardComponent,
-    cellsRemaining: CellsRemainingComponent
+    remainingValueCounts: RemainingValueCountsComponent
   },
   template: `
-  <div class="max-width-3 mx-auto">
-
-    <div class="flex flex-column">
-      <cells-remaining/>
-      <board></board>
+    <div class="flex justify-around fit">
+      <div class="col-3">
+        <remaining-value-counts/>
+      </div>
+      <div class="flex max-width-2">
+        <board/>
+      </div>
     </div>
-  </div>
   `
 });
 
