@@ -31,11 +31,11 @@ const app = new Vue({
     remainingValueCounts: RemainingValueCountsComponent
   },
   template: `
-    <div class="flex justify-around fit">
+    <div class="flex justify-around fit py3">
       <div class="col-3">
         <remaining-value-counts/>
       </div>
-      <div class="flex max-width-2">
+      <div class="flex max-width-3">
         <board/>
       </div>
     </div>

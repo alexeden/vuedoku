@@ -2,6 +2,7 @@
 
   color: white;
   font-weight: 100;
+  font-size: 1.2rem;
 
   &__line, p {
     line-height: 1.5rem;
@@ -15,6 +16,8 @@
     &--matches-selected {
       color: $cell-selected-font-color;
       font-weight: $cell-selected-font-weight;
+      background-color: $related-selected-background-color;
+      border-bottom: none;
 
     }
   }
