@@ -1,0 +1,35 @@
+/*
+300
+400
+500
+700
+ */
+@font-face {
+    font-family: "Lato";
+    src: url("#{$lato-font-path}/Lato-Hairline.ttf"); // format("ttf");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("#{$lato-font-path}/Lato-Light.ttf") format("ttf");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("#{$lato-font-path}/Lato-Regular.ttf") format("ttf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("#{$lato-font-path}/Lato-Bold.ttf") format("ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("#{$lato-font-path}/Lato-Black.ttf") format("ttf");
+    font-weight: 900;
+}

@@ -2,40 +2,50 @@
 @import "color";
 @import "variables";
 $quicksand-font-path: "./quicksand";
-$primary-font-family: "Quicksand";
+$lato-font-path: "./lato";
+$primary-font-family: "Lato";
 @import "quicksand";
-@import "typography";
-// @import "~gridlex";
+@import "lato";
 @import "materialize";
+@import "typography";
 
 
 $num-cols: 9;
 $cell-error-color: #E53935;
 $cell-height: 5rem;
-$cell-padding: 0.2rem;
+$cell-padding: 0.05rem;
 $cell-font-size: 2rem;
 $cell-font-color: #fff;
-$cell-font-weight: 300;
+$cell-font-weight: 100;
 $cell-selected-font-weight: 900;
 $cell-selected-background-color: rgba(white, 0.8);
 $cell-border-color: rgba(255, 255, 255, 0.2);
 $cell-selected-border-radius: 0%;
+$nonet-border-color: rgba(white, 0.8);
+$nonet-width: percentage(3/$num-cols);
+$nonet-padding: 0.5rem;
 $related-selected-background-color: rgba(white, 0.2);
 $cell-selected-font-color: #333;
-$nonet-width: percentage(3/$num-cols);
-$nonet-padding: 1rem;
 $cell-width: $nonet-width;
 
 
 .sudoku-board {
 
+  // font-family: "Lato" !important;
+
+
   &__nonet {
+    padding: $nonet-padding;
+    border: 0px solid $nonet-border-color;
     // width: $nonet-width;
     // float: left;
     //
-    // &--0, &--1, &--3, &--4, &--6, &--7 {
-    //   padding-right: $nonet-padding;
-    // }
+    &--0, &--1, &--3, &--4, &--6, &--7 {
+      border-right-width: 1px;
+    }
+    &--0, &--1, &--2, &--3, &--4, &--5 {
+      border-bottom-width: 1px;
+    }
   }
 
   &__cell-wrapper {
@@ -51,6 +61,7 @@ $cell-width: $nonet-width;
     display: block;
   }
 
+  max-height: 100vh;
   // margin: 0 auto;
   // max-width: 45rem;
   // padding: 3rem 0;
@@ -65,9 +76,10 @@ $cell-width: $nonet-width;
   color: $cell-font-color;
   font-size: $cell-font-size;
   font-weight: $cell-font-weight;
-  line-height: $cell-height;
+  // line-height: $cell-height;
   // min-height: $cell-height;
   height: 100%;
+  line-height: 75px;
   text-align: center;
   transition: background .5s, border-radius .25s .05s, box-shadow .333s, border-color .25s, transform .25s .25s;
   z-index: 1;
