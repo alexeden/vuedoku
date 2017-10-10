@@ -24,3 +24,4 @@ Features to add:
 - [ ] Allow the game to be paused
 - [ ] Animate a cell's value setting/clearing action
 - [x] Track the number of remaining numbers for each number
+- [ ] Detect when the game has been won
