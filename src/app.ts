@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { store } from './store';
-import { BoardComponent } from './board.component';
+import { BoardComponent } from './components';
 
 const app = new Vue({
   el: '#app',

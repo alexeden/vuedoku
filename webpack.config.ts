@@ -18,8 +18,7 @@ export const config: webpack.Configuration = {
       'vuex'
     ],
     styles: [
-      './scss/styles.scss',
-      './scss/materialize.scss'
+      './scss/styles.scss'
     ],
     app: './app.ts'
   },
@@ -34,7 +33,7 @@ export const config: webpack.Configuration = {
     extensions: ['.ts', '.js', '.html'],
     modules: ['node_modules'],
     alias: {
-      'apeden': path.resolve(__dirname, 'src/'),
+      'sudoku': path.resolve(__dirname, 'src/'),
       'vue$': 'vue/dist/vue.esm.js'
     }
   },

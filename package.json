@@ -16,8 +16,7 @@
     "materialize-css": "^0.100.2",
     "vue": "https://github.com/vuejs/vue#dev",
     "vue-class-component": "^5.0.2",
-    "vuex": "^2.4.1",
-    "vuex-typescript": "^0.1.0"
+    "vuex": "^2.4.1"
   },
   "devDependencies": {
     "@types/extract-text-webpack-plugin": "^2.1.0",

@@ -1,27 +1,47 @@
-.my-0 {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
+@charset "UTF-8";
+@import "color";
+@import "variables";
+@import "materialize";
 
-.py-0 {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
+$cell-error-color: #E53935;
+$cell-height: 5rem;
+$cell-padding: 0.2rem;
+$cell-font-size: 2rem;
+$cell-font-color: #eee;
+$cell-font-weight: 300;
+$cell-selected-font-weight: 900;
+$cell-selected-background-color: rgba(white, 0.8);
+$cell-border-color: rgba(255, 255, 255, 0.2);
+$cell-selected-border-radius: 10%;
+$related-selected-background-color: rgba(white, 0.2);
+$cell-selected-font-color: #333;
+$cell-width: percentage(1/$num-cols);
 
-.mx-0 {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
+.sudoku-board {
+  &__row {
+    height: $cell-height;
+    &:nth-child(3n) {
+      margin-bottom: 1rem;
+    }
+  }
 
-.px-0 {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
+  &__cell-wrapper {
+    padding: $cell-padding;
+    height: $cell-height;
+    width: $cell-width;
+    float: left;
+    box-sizing: border-box;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+    display: block;
+  }
 
-.board {
-  width: 45rem !important;
-  z-index: 0;
+  margin: 0 auto;
+  max-width: 45rem;
   padding: 3rem 0;
+  width: 45rem;
+  z-index: 0;
 }
 
 .grad-bg {
@@ -36,71 +56,52 @@
   background: linear-gradient(35deg, #7f00ff, #e100ff 90%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+
 .sudoku-cell {
-  padding: 0rem !important;
-  margin: 0 !important;
-  box-sizing: border-box;
-  position: relative;
-  height: 5rem;
-  z-index: 1;
-  border: rgba(255, 255, 255, 0.2) 1px solid !important;
-  transition: background .5s, border-radius .25s .05s, border-color .25s, transform .25s .25s;
-  font-size: 3rem !important;
-  font-weight: 100;
-
+  border: $cell-border-color 1px solid;
+  color: $cell-font-color;
+  font-size: $cell-font-size;
+  font-weight: $cell-font-weight;
+  height: 100%;
+  line-height: $cell-height;
   text-align: center;
-  color: #eee;
-}
+  transition: background .5s, border-radius .25s .05s, border-color .25s, transform .25s .25s;
+  z-index: 1;
 
-.sudoku-cell--impossible {
-  border: red 1px solid !important;
-  color: red !important;
-}
+  &:hover {
+    cursor: pointer;
+  }
 
+  &--selected {
+    background-color: $cell-selected-background-color !important;
+    border-radius: $cell-selected-border-radius;
+    color: $cell-selected-font-color;
+    border: 1px inset $cell-selected-font-color !important;
+    font-weight: $cell-selected-font-weight !important;
+  }
 
-.cell-wrapper {
-  padding: 0.1rem !important;
-}
+  &--matches-selected {
+    color: $cell-selected-font-color;
+  }
 
-.sudoku-cell--selected {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 25%;
-  color: #333333;
-  border: 1px inset #333333 !important;
-  font-weight: 900 !important;
-}
-
-
-
-.sudoku-cell:hover {
-  cursor: pointer;
-}
-
-.sudoku-cell--col-selected,
-.sudoku-cell--nonet-selected,
-.sudoku-cell--row-selected {
-  background-color: rgba(255, 255, 255, .2);
-  border-radius: 25%;
-}
+  &--col-selected,
+  &--nonet-selected,
+  &--row-selected {
+    background-color: $related-selected-background-color;
+    border-radius: $cell-selected-border-radius;
+  }
 
 
-.sudoku-cell__guess {
-  position: absolute;
-  line-height: 1rem;
-  font-size: .2em !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.sudoku-cell__value {
-  display: block;
-  line-height: 4rem;
-  height: 4rem;
-  margin: 0.5rem !important;
-  width: 4rem;
-  border: none !important;
-  /*rgba(255, 255, 255, 0) 1px solid !important;*/
-  /*border-radius: 50%;*/
-  /*transition: color 1s;*/
+  &--locked {
+    // background-color: $cell-selected-background-color !important;
+    border-radius: 50%;
+    // color: $cell-selected-font-color !important;
+  }
+
+
+  &--impossible {
+    border: $cell-error-color 1px solid !important;
+    background-color: $cell-error-color !important;
+    color: $cell-font-color !important;
+  }
 }

@@ -1,5 +1,5 @@
 import { GetterTree } from 'vuex';
-import { Cell } from './core';
+import { Cell } from 'sudoku/lib';
 import { State } from './state';
 
 

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { mapMutations, mapState, mapGetters } from 'vuex';
-import {} from './store';
+import { State } from 'sudoku/store';
 
 export const CellComponent: Vue.ComponentOptions<any> = {
   props: {
@@ -13,17 +13,17 @@ export const CellComponent: Vue.ComponentOptions<any> = {
   computed: {
 
     ...mapState({
-      selected(this: any, {cursor: {col, row}}) {
-        return this.col === col && this.row === row;
+      selected(this: any, {board: {cursor}}: State) {
+        return this.col === cursor.col && this.row === cursor.row;
       },
-      rowSelected(this: any, {cursor: {row}}) {
-        return this.row === row;
+      rowSelected(this: any, {board: {cursor}}: State) {
+        return this.row === cursor.row;
       },
-      colSelected(this: any, {cursor: {col}}) {
-        return this.col === col;
+      colSelected(this: any, {board: {cursor}}: State) {
+        return this.col === cursor.col;
       },
-      nonetSelected(this: any, {cursor: {nonet}}) {
-        return this.nonet === nonet;
+      nonetSelected(this: any, {board: {cursor}}: State) {
+        return this.nonet === cursor.nonet;
       }
     }),
 
@@ -46,7 +46,8 @@ export const CellComponent: Vue.ComponentOptions<any> = {
         'sudoku-cell--col-selected': this.colSelected,
         'sudoku-cell--nonet-selected': this.nonetSelected,
         'sudoku-cell--selected': this.selected,
-        'sudoku-cell--impossible': this.hasImpossibleValue
+        'sudoku-cell--impossible': this.hasImpossibleValue,
+        'sudoku-cell--matches-selected': this.$store.getters.selectedCell.value === this.value
       };
     },
 
@@ -78,8 +79,7 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       :class="cellCssClasses"
       @click="onCellClick"
       class="sudoku-cell">
-      <span class="sudoku-cell__value">{{value}}</span>
+      {{value}}
     </div>
   `
-  // <span class="sudoku-cell__guess">{{possibleCellValues | join('  ')}}</span>
 };

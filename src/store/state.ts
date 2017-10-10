@@ -1,5 +1,5 @@
 import { chunkify, flatten } from '../utils';
-import { Game, BoardCursor, Board, Cell } from './core';
+import { Game, GridCursor, Cell } from 'sudoku/lib';
 
 export type State = Game;
 
@@ -16,25 +16,18 @@ export const createGame =
       = chunkify(9, indexed).map((partialCells, row) =>
           partialCells.map((cell, col): Cell => ({
             ...cell,
-            ...BoardCursor.of(row, col).toCellLocation()
+            ...GridCursor.of(row, col).toCellLocation()
           }))
         );
 
     // Flatten the rows
     const cells = flatten(rows);
-
-    const board: Board = {
-      cells,
-      cursor: BoardCursor.of()
-    };
+    const cursor = GridCursor.of();
 
     return {
-      board,
-      get cells() {
-        return board.cells;
-      },
-      get cursor() {
-        return board.cursor;
+      board: {
+        cells,
+        cursor
       }
     };
   };

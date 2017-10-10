@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
+import { State } from 'sudoku/store';
 import { CellComponent } from './cell.component';
-// import { State } from './store';
 
 interface BoardComponent extends Vue {
   chunkify<T>(size: number, list: T[]): T[][];
@@ -13,21 +13,18 @@ export const BoardComponent: Vue.ComponentOptions<BoardComponent> = {
   },
 
   template: `
-    <div class="container board">
-      <div v-for="row in chunkify(9, board)" class="row my-0 py-0">
-        <div v-for="subRow in chunkify(3, row)" class="col s4 px-0">
-          <div class="col s4 cell-wrapper" v-for="cell in subRow">
-            <cell :cell="cell" v-bind="cell"/>
-          </div>
+    <div class="sudoku-board">
+      <div v-for="row in chunkify(9, board)" class="sudoku-board__row">
+        <div class="sudoku-board__cell-wrapper" v-for="cell in row">
+          <cell :cell="cell" v-bind="cell"/>
         </div>
       </div>
     </div>
   `,
-
   computed: {
     ...mapState({
-      board: (state: any) => state.board.cells,
-      cursor: (state: any) => state.board.cursor
+      board: (state: State) => state.board.cells,
+      cursor: (state: State) => state.board.cursor
     })
   },
   methods: {
