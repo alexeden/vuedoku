@@ -27,5 +27,15 @@ export const getters: GetterTree<State, State> = {
     (cell: Cell): number[] =>
       [1, 2, 3, 4, 5, 6, 7, 8, 9].filter(value =>
         !impossibleValues(cell).includes(value)
-      )
+      ),
+  remainingValueCounts: ({board: {cells}}): {[value: number]: number} => {
+    // (value: number): {[value: number]: number} =>
+    const counts = [1, 2, 3, 4, 5, 6, 7, 8, 9].reduce((obj, value) => ({ ...obj, [value]: 9 }), {});
+
+    cells
+      .filter(cell => !!cell.value)
+      .map(cell => counts[cell.value as number]--);
+
+    return counts;
+  }
 };

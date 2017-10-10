@@ -15,22 +15,19 @@ export const BoardComponent: Vue.ComponentOptions<BoardComponent> = {
   },
 
   template: `
-    <div class="max-width-3 mx-auto">
-        <div class="sudoku-board flex flex-wrap">
-          <div
-            v-for="(nonet, nonetIndex) in nonets"
-            :key="nonetIndex"
-            :class="'sudoku-board__nonet--' + nonetIndex"
-            class="col-4 flex-wrap flex sudoku-board__nonet">
-            <div
-              v-for="cell in nonet"
-              :key="cell.index"
-              class="col-4 flex items-center sudoku-board__cell-wrapper">
-              <cell :cell="cell" v-bind="cell"/>
-            </div>
-          </div>
-
+    <div class="sudoku-board flex flex-wrap">
+      <div
+        v-for="(nonet, nonetIndex) in nonets"
+        :key="nonetIndex"
+        :class="'sudoku-board__nonet--' + nonetIndex"
+        class="col-4 flex-wrap flex sudoku-board__nonet">
+        <div
+          v-for="cell in nonet"
+          :key="cell.index"
+          class="col-4 flex items-center sudoku-board__cell-wrapper">
+          <cell :cell="cell" v-bind="cell"/>
         </div>
+      </div>
     </div>
   `,
   computed: {
