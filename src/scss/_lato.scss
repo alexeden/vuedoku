@@ -1,35 +1,29 @@
-/*
-300
-400
-500
-700
- */
 @font-face {
     font-family: "Lato";
-    src: url("#{$lato-font-path}/Lato-Hairline.ttf"); // format("ttf");
+    src: url("./lato/Lato-Hairline.ttf");
     font-weight: 100;
 }
 
 @font-face {
     font-family: "Lato";
-    src: url("#{$lato-font-path}/Lato-Light.ttf") format("ttf");
+    src: url("./lato/Lato-Light.ttf");
     font-weight: 300;
 }
 
 @font-face {
     font-family: "Lato";
-    src: url("#{$lato-font-path}/Lato-Regular.ttf") format("ttf");
+    src: url("./lato/Lato-Regular.ttf");
     font-weight: 400;
 }
 
 @font-face {
     font-family: "Lato";
-    src: url("#{$lato-font-path}/Lato-Bold.ttf") format("ttf");
+    src: url("./lato/Lato-Bold.ttf");
     font-weight: 700;
 }
 
 @font-face {
     font-family: "Lato";
-    src: url("#{$lato-font-path}/Lato-Black.ttf") format("ttf");
+    src: url("./lato/Lato-Black.ttf");
     font-weight: 900;
 }

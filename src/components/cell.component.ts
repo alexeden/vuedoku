@@ -12,19 +12,15 @@ export const CellComponent: Vue.ComponentOptions<any> = {
     value: { type: Number }
   },
   computed: {
-
     ...mapState({
       selected(this: any, {board: {cursor}}: State) {
         return this.col === cursor.col && this.row === cursor.row;
       },
-      rowSelected(this: any, {board: {cursor}}: State) {
-        return this.row === cursor.row;
+      zoneSelected(this: any, {board: {cursor}}: State) {
+        return this.row === cursor.row || this.col === cursor.col || this.nonet === cursor.nonet;
       },
-      colSelected(this: any, {board: {cursor}}: State) {
-        return this.col === cursor.col;
-      },
-      nonetSelected(this: any, {board: {cursor}}: State) {
-        return this.nonet === cursor.nonet;
+      matchesSelected(this: any, state, {selectedCell}) {
+        return selectedCell.value === this.value;
       }
     }),
 
@@ -39,14 +35,11 @@ export const CellComponent: Vue.ComponentOptions<any> = {
     cellCssClasses() {
       return {
         'sudoku-cell--locked': this.locked,
-        'sudoku-cell--row-selected': this.rowSelected,
-        'sudoku-cell--col-selected': this.colSelected,
-        'sudoku-cell--nonet-selected': this.nonetSelected,
+        'sudoku-cell--zone-selected': this.zoneSelected,
         'sudoku-cell--selected': this.selected,
         'sudoku-cell--impossible': this.hasImpossibleValue,
-        'sudoku-cell--matches-selected': this.$store.getters.selectedCell.value === this.value,
+        'sudoku-cell--matches-selected': this.matchesSelected,
         'sudoku-cell--value-is-complete': this.$store.getters.valueIsComplete(this.value)
-        // this.$store.getters.selectedCell.value === this.value
 
       };
     }
@@ -67,6 +60,7 @@ export const CellComponent: Vue.ComponentOptions<any> = {
       @click="onCellClick"
       class="sudoku-cell self-center">
       {{value}}
+      <i v-if="locked && zoneSelected" class="material-icons sudoku-cell__lock">lock</i>
     </div>
   `
 };

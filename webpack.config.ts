@@ -13,9 +13,10 @@ export const config: webpack.Configuration = {
   devtool: 'cheap-module-eval-source-map',
 
   entry: {
-    /* Common */ vue: [
+    /* Common */ vendor: [
       'vue',
-      'vuex'
+      'vuex',
+      'material-design-icons'
     ],
     styles: [
       'basscss/css/basscss.css',

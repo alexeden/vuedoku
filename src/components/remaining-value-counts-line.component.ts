@@ -16,7 +16,7 @@ export const RemainingValueCountsLineComponent: Vue.ComponentOptions<any> = {
     },
     classes() {
       return {
-        'remaining-value-counts-line--matches-selected': this.$store.getters.selectedCell.value === this.value,
+        'remaining-value-counts-line--matches-selected': this.$store.getters.selectedCellValue === this.value,
         'remaining-value-counts-line--complete': this.noneRemaining
       };
     }
