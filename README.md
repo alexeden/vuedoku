@@ -1,6 +1,6 @@
 # learning-vuex: Sudoku
 
-![UI Screenshot](https://raw.githubusercontent.com/alexeden/learning-vuex/master/docs/Screen%20Shot%202017-10-10%20at%202.42.25%20AM.png)
+![UI Screenshot](https://raw.githubusercontent.com/alexeden/learning-vuex/master/docs/Screen%20Shot%202017-10-10%20at%2010.27.22%20PM.png)
 
 Features to add:
 
