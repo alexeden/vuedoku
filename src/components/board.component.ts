@@ -3,6 +3,7 @@ import { mapState } from 'vuex';
 import { State } from 'sudoku/store';
 import { Cell } from 'sudoku/lib';
 import { CellComponent } from './cell.component';
+import { RemainingValueCountsComponent } from './remaining-value-counts.component';
 
 interface BoardComponent extends Vue {
   cells: Cell[];
@@ -10,24 +11,34 @@ interface BoardComponent extends Vue {
 
 export const BoardComponent: Vue.ComponentOptions<BoardComponent> = {
   components: {
-    cell: CellComponent
+    cell: CellComponent,
+    remainingValueCounts: RemainingValueCountsComponent
   },
 
   template: `
-    <div class="sudoku-board flex flex-wrap">
-      <div
-        v-for="(nonet, nonetIndex) in nonets"
-        :key="nonetIndex"
-        :class="'sudoku-board__nonet--' + nonetIndex"
-        class="col-4 flex-wrap flex sudoku-board__nonet">
-        <div
-          v-for="cell in nonet"
-          :key="cell.index"
-          class="col-4 flex items-center sudoku-board__cell-wrapper">
-          <cell :cell="cell" v-bind="cell"/>
+    <div class="flex justify-around fit py3">
+      <div class="col-3">
+        <remaining-value-counts/>
+      </div>
+      <div class="flex max-width-3">
+        <div class="sudoku-board flex flex-wrap">
+          <div
+            v-for="(nonet, nonetIndex) in nonets"
+            :key="nonetIndex"
+            :class="'sudoku-board__nonet--' + nonetIndex"
+            class="col-4 flex-wrap flex sudoku-board__nonet">
+            <div
+              v-for="(cell, cellIndex) in nonet"
+              :key="cell.index"
+              :class="'sudoku-board__cell-wrapper--'+cellIndex"
+              class="col-4 flex items-center sudoku-board__cell-wrapper">
+              <cell :cell="cell" v-bind="cell"/>
+            </div>
+          </div>
         </div>
       </div>
-  </div>
+    </div>
+
   `,
   computed: {
     ...mapState({

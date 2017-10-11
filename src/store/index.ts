@@ -8,6 +8,8 @@ import { mutations } from './mutations';
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
+  strict: true,
+
   state: createGame([
     1, 8, 4,  2, 6, 3,  9, 5, 7,
     2, 7, 6,  5, 1, 0,  3, 4, 8,

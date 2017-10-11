@@ -30,6 +30,7 @@ export const getters: GetterTree<State, State> = {
   totalRemainingValues: ({board: {cells}}) =>
     cells.reduce((count, cell) => count - (!!cell.value ? 1 : 0), 81),
 
+
   remainingValueCounts: ({board: {cells}}): {[value: number]: number} => {
     const counts = [1, 2, 3, 4, 5, 6, 7, 8, 9].reduce((obj, value) => ({ ...obj, [value]: 9 }), {});
 
@@ -40,6 +41,12 @@ export const getters: GetterTree<State, State> = {
     return counts;
   },
   remaingValueOf: ({board: {cells}}) =>
-    (value: number): number =>
+    (value: number): number => (
       cells.reduce((count, cell) => count - (cell.value === value ? 1 : 0), 9)
+    ),
+
+  valueIsComplete: (state, {remaingValueOf}) =>
+    (value: number): boolean => (
+      remaingValueOf(value) < 1
+    )
 };

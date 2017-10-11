@@ -44,7 +44,10 @@ export const CellComponent: Vue.ComponentOptions<any> = {
         'sudoku-cell--nonet-selected': this.nonetSelected,
         'sudoku-cell--selected': this.selected,
         'sudoku-cell--impossible': this.hasImpossibleValue,
-        'sudoku-cell--matches-selected': this.$store.getters.selectedCell.value === this.value
+        'sudoku-cell--matches-selected': this.$store.getters.selectedCell.value === this.value,
+        'sudoku-cell--value-is-complete': this.$store.getters.valueIsComplete(this.value)
+        // this.$store.getters.selectedCell.value === this.value
+
       };
     }
   },
