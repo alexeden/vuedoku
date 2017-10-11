@@ -11,7 +11,7 @@ Features to add:
 - [x] Basic cell styling
 - [x] Press tab to go right, shift-tab to go left
 - [x] Add a border between the board's nonets
-- [ ] Stylize the locked cells
+- [x] Stylize the locked cells
 - [x] Press backspace or delete to clear a cell
 - [x] Track each cell's remaining possible values
 - [x] Indicate when a cell has incorrect value
