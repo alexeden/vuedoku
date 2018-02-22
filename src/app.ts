@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { store } from './store';
-import { BoardComponent } from './components';
+import Components from './components';
 
 Vue.filter('join', <T>(list: T[], separator = ' '): string => {
   if (!Array.isArray(list)) {
@@ -14,7 +14,7 @@ const app = new Vue({
   template: `<board/>`,
   store,
   components: {
-    board: BoardComponent
+    board: Components.Board
   },
   mounted() {
     this.$el.parentElement!.addEventListener(

@@ -32,7 +32,7 @@ export const config: webpack.Configuration = {
   },
 
   resolve: {
-    extensions: ['.ts', '.js', '.html', '.css'],
+    extensions: ['.ts', '.js', '.html', '.css', '.vue'],
     modules: ['node_modules'],
     alias: {
       'sudoku': path.resolve(__dirname, 'src/'),
@@ -50,6 +50,20 @@ export const config: webpack.Configuration = {
 
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
+            // the "scss" and "sass" values for the lang attribute to the right configs here.
+            // other preprocessors should work out of the box, no loader config like this necessary.
+            // 'scss': 'vue-style-loader!css-loader!sass-loader',
+            // 'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+          }
+          // other vue-loader options go here
+        }
+      },
       {
         test: /\.html$/,
         use: 'raw-loader'
@@ -74,14 +88,22 @@ export const config: webpack.Configuration = {
         })
       },
       {
-        test: /\.ts$/,
-        use: [{
-          loader: 'awesome-typescript-loader',
-          options: {
-            configFileName: path.resolve(__dirname, 'src', 'tsconfig.json')
-          }
-        }]
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
       },
+      // {
+      //   test: /\.ts$/,
+      //   use: [{
+      //     loader: 'awesome-typescript-loader',
+      //     options: {
+      //       configFileName: path.resolve(__dirname, 'src', 'tsconfig.json')
+      //     }
+      //   }]
+      // },
       {
         test: /\.(jpg|png|gif|otf|ttf|woff|woff2|cur|ani)$/,
         use: 'url-loader?name=[name].[hash:20].[ext]&limit=10000'
