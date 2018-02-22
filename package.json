@@ -13,6 +13,7 @@
   },
   "author": "Alex Eden",
   "dependencies": {
+    "@types/chalk": "^2.2.0",
     "basscss": "^8.0.4",
     "material-design-icons": "^3.0.1",
     "materialize-css": "^0.100.2",
@@ -24,6 +25,7 @@
     "@types/html-webpack-plugin": "^2.30.2",
     "@types/node": "^9.4.6",
     "@types/webpack": "^3.8.8",
+    "chalk": "^2.3.1",
     "circular-dependency-plugin": "^4.4.0",
     "clean-webpack-plugin": "^0.1.18",
     "copy-webpack-plugin": "^4.4.1",

@@ -7,17 +7,14 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
+import * as docLoader from './loaders/doc-loader';
+
+console.log(JSON.stringify(docLoader, null, 3));
+
 export const config: webpack.Configuration = {
   target: 'web',
   context: path.resolve(process.cwd(), 'src'),
   devtool: 'cheap-module-eval-source-map',
-
-  resolveLoader: {
-    modules: [
-      'node_modules',
-      'loaders'
-    ]
-  },
 
   entry: {
     /* Common */ vendor: [
@@ -60,7 +57,11 @@ export const config: webpack.Configuration = {
       {
         test: /\.vue$/,
         use: [
-          'doc-loader',
+          {
+            loader: path.resolve(__dirname, 'loaders', 'doc-loader.ts'),
+            // loader: 'doc-loader',
+            options: {}
+          },
           {
             loader: 'vue-loader',
             options: {
