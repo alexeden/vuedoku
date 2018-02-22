@@ -1,35 +1,11 @@
-import { chunkify, flatten } from '../utils';
 import { ActionTree, MutationTree, GetterTree } from 'vuex';
-
-import { Game, GridCursor, Cell } from 'sudoku/lib';
+import { Game, Cell, createBoard } from 'sudoku/lib';
 
 export type State = Game;
 
 const createState = (values: number[]): Game => {
-  // Convert each number into an object
-  const indexed
-    = values
-        .map(value => value !== 0 ? value : null)
-        .map(value => ({ value, locked: !!value }));
-
-  // Chunk the values into rows of 9
-  const rows
-    = chunkify(9, indexed).map((partialCells, row) =>
-        partialCells.map((cell, col): Cell => ({
-          ...cell,
-          ...GridCursor.of(row, col).toCellLocation()
-        }))
-      );
-
-  // Flatten the rows
-  const cells = flatten(rows);
-  const cursor = GridCursor.of();
-
   return {
-    board: {
-      cells,
-      cursor
-    }
+    board: createBoard(values)
   };
 };
 
@@ -144,7 +120,7 @@ const mutations: MutationTree<State> = {
 };
 
 export default {
-  createState,
+  state: createState,
   getters,
   actions,
   mutations

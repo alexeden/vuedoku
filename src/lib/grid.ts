@@ -1,4 +1,4 @@
-export interface GridLocation {
+export interface GridCoordinates {
   index: number;
   col: number;
   row: number;
@@ -6,7 +6,7 @@ export interface GridLocation {
 }
 
 
-export class GridCursor implements GridLocation {
+export class GridCursor implements GridCoordinates {
   static of(row = 0, col = 0) {
     return new GridCursor(
       (row + 9) % 9,
@@ -14,7 +14,7 @@ export class GridCursor implements GridLocation {
     );
   }
 
-  static from(loc: GridCursor|GridLocation) {
+  static from(loc: GridCursor|GridCoordinates) {
     return GridCursor.of(loc.row, loc.col);
   }
 
@@ -23,7 +23,7 @@ export class GridCursor implements GridLocation {
     public readonly col: number
   ) {}
 
-  is(loc: GridLocation): boolean {
+  is(loc: GridCoordinates): boolean {
     return this.index === loc.index;
   }
 
@@ -55,7 +55,7 @@ export class GridCursor implements GridLocation {
     return GridCursor.of(row, col);
   }
 
-  toCellLocation(): GridLocation {
+  toCellLocation(): GridCoordinates {
     return {
       index: this.index,
       col: this.col,
