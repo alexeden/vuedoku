@@ -33,7 +33,7 @@ export const config: webpack.Configuration = {
   },
 
   output: {
-    path: path.resolve(process.cwd(), 'deploy'),
+    path: path.resolve(process.cwd(), 'dist'),
     filename: '[name].[chunkhash].js',
     publicPath: ''
   },
@@ -137,7 +137,7 @@ export const config: webpack.Configuration = {
 
     new ExtractTextPlugin({ filename: '[name].css', allChunks: false }),
     new CircularDependencyPlugin({ exclude: /node_modules/ }),
-    new CleanWebpackPlugin(['deploy'])
+    new CleanWebpackPlugin(['dist'])
   ]
 };
 
