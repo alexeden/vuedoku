@@ -25,9 +25,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import { mapState } from 'vuex';
-  import { State } from 'sudoku/store';
-  import { Cell } from 'sudoku/lib';
+  import { Cell, GridCursor } from 'sudoku/lib';
   import CellComponent from './cell';
   import RemainingValueCountsComponent from './remaining-value-counts';
 
@@ -37,20 +35,20 @@
       remainingValueCounts: RemainingValueCountsComponent
     },
     computed: {
-      ...mapState({
-        cells: (state: State) => state.board.cells,
-        cursor: (state: State) => state.board.cursor
-      }),
+      cells(): Cell[] {
+        return this.$store.state.board.cells;
+      },
+
+      cursor(): GridCursor {
+        return this.$store.state.board.cursor;
+      },
+
       nonets(): Cell[][] {
         const indexedNonets: {[nonet: number]: Cell[]}
-          = this.cells
-              .reduce(
-                (obj, cell) => ({
-                  ...obj,
-                  [cell.nonet]: (obj[cell.nonet] || []).concat(cell)
-                }),
-                {}
-              );
+          = this.cells.reduce((obj, cell) => ({
+              ...obj,
+              [cell.nonet]: (obj[cell.nonet] || []).concat(cell)
+            }), {});
 
         return Object.keys(indexedNonets)
           .sort()

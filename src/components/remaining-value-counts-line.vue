@@ -22,13 +22,13 @@
       }
     },
     computed: {
-      remaining() {
+      remaining(): number {
         return this.$store.getters.remaingValueOf(this.value);
       },
-      noneRemaining() {
+      noneRemaining(): boolean {
         return this.remaining === 0;
       },
-      classes() {
+      classes(): { [klass: string]: boolean } {
         return {
           'remaining-value-counts-line--matches-selected': this.$store.getters.selectedCellValue === this.value,
           'remaining-value-counts-line--complete': this.noneRemaining

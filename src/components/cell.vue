@@ -11,8 +11,7 @@
 <script lang="ts">
   /* eslint-disable */
   import Vue from 'vue';
-  import { mapState } from 'vuex';
-  import { State } from 'sudoku/store';
+  import { GridCursor } from 'sudoku/lib';
 
   export default Vue.extend({
     props: {
@@ -24,27 +23,37 @@
       value: { type: Number }
     },
     computed: {
-      ...mapState({
-        selected(this: any, {board: {cursor}}: State) {
-          return this.col === cursor.col && this.row === cursor.row;
-        },
-        zoneSelected(this: any, {board: {cursor}}: State) {
-          return this.row === cursor.row || this.col === cursor.col || this.nonet === cursor.nonet;
-        },
-        matchesSelected(this: any, state, {selectedCell}) {
-          return selectedCell.value === this.value;
-        }
-      }),
+      selected(): boolean {
+        return this.col === this.cursor.col && this.row === this.cursor.row;
+      },
 
-      possibleCellValues() {
+      cursor(): GridCursor {
+        return this.$store.state.board.cursor;
+      },
+
+      zoneSelected(): boolean {
+        return this.row === this.cursor.row
+          || this.col === this.cursor.col
+          || this.nonet === this.cursor.nonet;
+      },
+
+      matchesSelected(): boolean {
+        return this.selectedCellValue === this.value;
+      },
+
+      selectedCellValue(): number|null {
+        return this.$store.getters.selectedCellValue;
+      },
+
+      possibleCellValues(): number[] {
         return this.$store.getters.possibleCellValueFinder(this);
       },
 
-      hasImpossibleValue() {
+      hasImpossibleValue(): boolean {
         return this.$store.getters.impossibleValues(this).includes(this.value);
       },
 
-      cellCssClasses() {
+      cellCssClasses(): { [klass: string]: boolean } {
         return {
           'sudoku-cell--locked': this.locked,
           'sudoku-cell--zone-selected': this.zoneSelected,
