@@ -1,15 +1,21 @@
-/// <reference types="webpack" />
 import { RawSourceMap } from 'source-map';
 import * as webpack from 'webpack';
 import chalk from 'chalk';
 
 const DocLoader: webpack.loader.Loader = function(
   this: webpack.loader.LoaderContext,
-  content: string | Buffer,
+  source: string,
   sourceMap?: RawSourceMap
-): string | Buffer | void | undefined {
+) {
+  console.log(chalk.yellow(JSON.stringify(source)));
 
-  return content;
+  this.callback(
+    null,
+    `module.exports = function(Component) {Component.options.__docs = ${JSON.stringify(source)}}`,
+    sourceMap
+  );
+
+  // return source;
 };
 
 DocLoader.pitch = function(remainingRequest, precedingRequest, data) {

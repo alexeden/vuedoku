@@ -57,3 +57,7 @@
     }
   });
 </script>
+
+<documentation>
+Hello, documentation!
+</documentation>

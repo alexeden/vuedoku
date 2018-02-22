@@ -1,15 +1,9 @@
 /// <reference path="./webpack.declarations.d.ts" />
 import * as webpack from 'webpack';
-// import * as chalk from 'chalk';
 import * as path from 'path';
 import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-
-import * as docLoader from './loaders/doc-loader';
-
-console.log(JSON.stringify(docLoader, null, 3));
 
 export const config: webpack.Configuration = {
   target: 'web',
@@ -57,15 +51,20 @@ export const config: webpack.Configuration = {
       {
         test: /\.vue$/,
         use: [
-          {
-            loader: path.resolve(__dirname, 'loaders', 'doc-loader.ts'),
-            // loader: 'doc-loader',
-            options: {}
-          },
+          // {
+          //   loader: path.resolve(__dirname, 'loaders', 'doc-loader.ts'),
+          //   // loader: 'doc-loader',
+          //   options: {}
+          // },
           {
             loader: 'vue-loader',
             options: {
               loaders: {
+                'documentation': path.resolve(__dirname, 'loaders', 'doc-loader.ts')
+                //   loader: path.resolve(__dirname, 'loaders', 'doc-loader.ts'),
+                //   // loader: 'doc-loader',
+                //   options: {}
+                // }
                 // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
                 // the "scss" and "sass" values for the lang attribute to the right configs here.
                 // other preprocessors should work out of the box, no loader config like this necessary.
@@ -125,7 +124,7 @@ export const config: webpack.Configuration = {
     }),
 
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vue'],
+      names: ['vendor'],
       // tells Webpack we really only want what we specified in the entry
       minChunks: Infinity
     }),
@@ -137,8 +136,7 @@ export const config: webpack.Configuration = {
     ),
 
     new ExtractTextPlugin({ filename: '[name].css', allChunks: false }),
-    new CircularDependencyPlugin({ exclude: /node_modules/ }),
-    new CleanWebpackPlugin(['dist'])
+    new CircularDependencyPlugin({ exclude: /node_modules/ })
   ]
 };
 

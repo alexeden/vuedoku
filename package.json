@@ -7,8 +7,9 @@
     "url": "git+https://github.com/alexeden/learning-vuex.git"
   },
   "scripts": {
-    "build": "webpack --config ./build/webpack.config.ts",
+    "build": "npm run clean && webpack --config ./build/webpack.config.ts",
     "build:watch": "nodemon",
+    "clean": "rimraf dist",
     "start": "webpack-dev-server --inline --config ./build/webpack.config.ts"
   },
   "author": "Alex Eden",
@@ -51,7 +52,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "nodemonConfig": {
-    "ext": "ts",
+    "ext": "ts,vue",
     "exec": "npm run build",
     "events": {},
     "watch": [
