@@ -8,13 +8,13 @@ $primary-font-family: "Lato";
 @import "typography";
 
 $num-cols: 9;
-$green: #1ed29c;
+$green: #76FF03;
 $cell-error-color: #E53935;
 $cell-height: 5rem;
 $cell-padding: 0.15rem;
 $cell-font-size: 2rem;
 $cell-font-color: #fff;
-$cell-font-weight: 100;
+$cell-font-weight: 400;
 $cell-selected-font-weight: 900;
 $cell-selected-background-color: rgba(white, 0.8);
 $cell-border-color: rgba(255, 255, 255, 0.2);
@@ -116,6 +116,25 @@ $cell-selected-font-color: rgba(0, 0, 0, .6);
   left: 0;
   z-index: -1;
   background: #7f00ff; /* fallback for old browsers */
-  background: -webkit-linear-gradient(35deg, #7f00ff, #e100ff 90%); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(35deg, #7f00ff, #e100ff 90%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  // background: linear-gradient(35deg, #7f00ff, #e100ff 90%);
+  /* Sublime vivid */ background: linear-gradient(35deg, #fc466b, #3f5efb);
+
+
+  /* Argon */
+  background: linear-gradient(to right, #03001e, #7303c0, #ec38bc, #fdeff9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /* Cosmic fusion */
+
+  background: #ff00cc; /* fallback for old browsers */
+  background: linear-gradient(135deg, #ff00cc, #333399); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /* Dimigo */
+
+  background: #ec008c; /* fallback for old browsers */
+  background: linear-gradient(to bottom, #ec008c, #fc6767); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /* Timber */
+
+  background: #fc00ff; /* fallback for old browsers */
+  background: linear-gradient(35deg, #fc00ff, #00dbde); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

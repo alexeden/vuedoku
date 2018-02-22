@@ -1,16 +1,20 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { createGame } from './state';
-import { getters } from './getters';
-import { actions } from './actions';
-import { mutations } from './mutations';
+import game from './module.game';
+
+const {
+ createState,
+ getters,
+ actions,
+ mutations
+} = game;
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   strict: true,
 
-  state: createGame([
+  state: createState([
     1, 8, 4,  2, 6, 3,  9, 5, 7,
     2, 7, 6,  5, 1, 0,  3, 4, 8,
     5, 3, 0,  0, 8, 7,  6, 1, 2,
@@ -27,6 +31,3 @@ export const store = new Vuex.Store({
   getters,
   mutations
 });
-
-
-export * from './state';
