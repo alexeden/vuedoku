@@ -7,9 +7,9 @@
     "url": "git+https://github.com/alexeden/learning-vuex.git"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.ts",
-    "build:watch": "nodemon --exec \"npm run build\" -w webpack.config.ts",
-    "start": "webpack-dev-server --inline --config ./webpack.config.ts"
+    "build": "webpack --config ./build/webpack.config.ts",
+    "build:watch": "nodemon",
+    "start": "webpack-dev-server --inline --config ./build/webpack.config.ts"
   },
   "author": "Alex Eden",
   "dependencies": {
@@ -47,5 +47,14 @@
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
+  },
+  "nodemonConfig": {
+    "ext": "ts",
+    "exec": "npm run build",
+    "events": {},
+    "watch": [
+      "src/",
+      "build/"
+    ]
   }
 }
