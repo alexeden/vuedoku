@@ -1,3 +1,3 @@
-export * from './board.component';
-export * from './cell.component';
-export * from './remaining-value-counts.component';
+export './board.vue';
+export './cell.vue';
+export './remaining-value-counts.vue';
