@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -12,9 +12,11 @@
     ],
     "module": "es2015",
     "moduleResolution": "node",
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
+    "strictPropertyInitialization": true,
+    "suppressImplicitAnyIndexErrors": true,
     "paths": {
         "sudoku/*": [ "*" ]
     },
