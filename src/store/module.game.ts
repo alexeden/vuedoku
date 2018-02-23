@@ -1,9 +1,11 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex';
-import { Game, Cell, createBoard } from 'sudoku/lib';
+import { Board, Cell, createBoard } from 'sudoku/lib';
 
-export type State = Game;
+export type State = {
+  board: Board
+};
 
-const createState = (values: number[]): Game => {
+const createState = (values: number[]): State => {
   return {
     board: createBoard(values)
   };
@@ -40,11 +42,15 @@ const getters: GetterTree<State, State> = {
 
 
   remainingValueCounts: ({board: {cells}}): {[value: number]: number} => {
-    const counts = [1, 2, 3, 4, 5, 6, 7, 8, 9].reduce((obj, value) => ({ ...obj, [value]: 9 }), {});
+    const counts: { [value: number]: number } =
+      [1, 2, 3, 4, 5, 6, 7, 8, 9].reduce(
+        (obj, value) => ({ ...obj, [value]: 9 }),
+        {}
+      );
 
     cells
       .filter(cell => !!cell.value)
-      .map(cell => counts[cell.value as number]--);
+      .map(cell => counts[cell.value!]--);
 
     return counts;
   },
