@@ -1,41 +1,33 @@
 declare module 'vue-template-compiler' {
-  export function parseComponent(
-    // The single-file-component source code as as tring
-    template: string,
-    options?: ParseComponentOptions
-  ) {}
-
+  export function parseComponent(template: string, options?: ParseComponentOptions): SFCDescriptor;
   export interface ParseComponentOptions {
     pad: 'line' | 'space';
   }
 
-
-
-
   export interface CompilerOptions {
-    warn?: Function; // allow customizing warning in different environments; e.g. node
-    modules?: Array<ModuleOptions>; // platform specific modules; e.g. style; class
-    directives?: { [key: string]: Function }; // platform specific directives
-    staticKeys?: string; // a list of AST properties to be considered static; for optimization
-    isUnaryTag?: (tag: string) => ?boolean; // check if a tag is unary for the platform
     canBeLeftOpenTag?: (tag: string) => ?boolean; // check if a tag can be left opened
+    directives?: { [key: string]: Function }; // platform specific directives
     isReservedTag?: (tag: string) => ?boolean; // check if a tag is a native for the platform
-    preserveWhitespace?: boolean; // preserve whitespace between elements?
+    isUnaryTag?: (tag: string) => ?boolean; // check if a tag is unary for the platform
+    modules?: Array<ModuleOptions>; // platform specific modules; e.g. style; class
     optimize?: boolean; // optimize static content?
+    preserveWhitespace?: boolean; // preserve whitespace between elements?
+    staticKeys?: string; // a list of AST properties to be considered static; for optimization
+    warn?: Function; // allow customizing warning in different environments; e.g. node
 
     // web specific
-    mustUseProp?: (tag: string, type?: string, name: string) => boolean; // check if an attribute should be bound as a property
-    isPreTag?: (attr: string) => boolean; // check if a tag needs to preserve whitespace
-    getTagNamespace?: (tag: string) => string; // check the namespace for a tag
     expectHTML?: boolean; // only false for non-web builds
+    getTagNamespace?: (tag: string) => string; // check the namespace for a tag
     isFromDOM?: boolean;
-    shouldDecodeTags?: boolean;
+    isPreTag?: (attr: string) => boolean; // check if a tag needs to preserve whitespace
+    mustUseProp?: (tag: string, type?: string, name: string) => boolean; // check if an attribute should be bound as a property
     shouldDecodeNewlines?:  boolean;
     shouldDecodeNewlinesForHref?: boolean;
+    shouldDecodeTags?: boolean;
 
     // runtime user-configurable
-    delimiters?: [string, string]; // template delimiters
     comments?: boolean; // preserve comments in template
+    delimiters?: [string, string]; // template delimiters
 
     // for ssr optimization compiler
     scopeId?: string;
@@ -195,10 +187,12 @@ declare module 'vue-template-compiler' {
     customBlocks: Array<SFCBlock>;
   }
 
+  export type SFCBlockType = 'template' | 'script' | 'style' | 'customBlocks';
+
   export interface SFCBlock {
-    type: string;
+    type: SFCBlockType;
     content: string;
-    attrs: {[attribute:string]: string};
+    attrs: { [attribute:string]: string };
     start?: number;
     end?: number;
     lang?: string;
