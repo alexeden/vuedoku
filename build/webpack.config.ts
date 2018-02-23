@@ -5,10 +5,16 @@ import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
+import { DocPlugin } from './loaders/doc-plugin';
+const DocLoader = path.resolve(__dirname, 'loaders', 'doc-loader.ts');
+// const DocLoader = path.resolve(__dirname, 'loaders', 'doc-loader.ts');
+const DocLoader1 = path.resolve(__dirname, 'loaders', 'doc-loader-1.ts');
+
 export const config: webpack.Configuration = {
   target: 'web',
   context: path.resolve(process.cwd(), 'src'),
-  devtool: 'cheap-module-eval-source-map',
+  // devtool: 'cheap-module-eval-source-map',
+  devtool: false,
 
   entry: {
     /* Common */ vendor: [
@@ -24,6 +30,7 @@ export const config: webpack.Configuration = {
   },
 
   output: {
+    pathinfo: false,
     path: path.resolve(process.cwd(), 'dist'),
     filename: '[name].[chunkhash].js',
     publicPath: ''
@@ -51,28 +58,26 @@ export const config: webpack.Configuration = {
       {
         test: /\.vue$/,
         use: [
-          // {
-          //   loader: path.resolve(__dirname, 'loaders', 'doc-loader.ts'),
-          //   // loader: 'doc-loader',
-          //   options: {}
-          // },
           {
             loader: 'vue-loader',
             options: {
               loaders: {
-                'documentation': path.resolve(__dirname, 'loaders', 'doc-loader.ts')
-                //   loader: path.resolve(__dirname, 'loaders', 'doc-loader.ts'),
-                //   // loader: 'doc-loader',
-                //   options: {}
-                // }
-                // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-                // the "scss" and "sass" values for the lang attribute to the right configs here.
-                // other preprocessors should work out of the box, no loader config like this necessary.
-                // 'scss': 'vue-style-loader!css-loader!sass-loader',
-                // 'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+                // 'documentation': [
+                //   DocLoader
+                // ]
               }
             }
+          },
+          {
+            loader: DocLoader1,
+            // loader: 'doc-loader',
+            options: {}
           }
+          // {
+          //   loader: DocLoader1,
+          //   // loader: 'doc-loader',
+          //   options: {}
+          // }
         ]
       },
       {
@@ -114,6 +119,11 @@ export const config: webpack.Configuration = {
   },
 
   plugins: [
+
+    new DocPlugin({
+      name: 'hi!'
+    }),
+
     new HtmlWebpackPlugin({
       template: 'index.html',
       showErrors: true,
