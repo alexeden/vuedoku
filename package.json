@@ -10,6 +10,7 @@
     "build": "npm run clean && webpack --config ./build/webpack.config.ts",
     "build:watch": "nodemon",
     "clean": "rimraf dist",
+    "stats": "webpack --config ./build/webpack.config.ts --profile --json > build-stats.json",
     "start": "webpack-dev-server --inline --config ./build/webpack.config.ts"
   },
   "author": "Alex Eden",
