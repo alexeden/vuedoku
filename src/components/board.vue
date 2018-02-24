@@ -34,6 +34,13 @@
       cell: CellComponent,
       remainingValueCounts: RemainingValueCountsComponent
     },
+    props: {
+      // The game's initial value
+      value: {
+        required: false,
+        type: Number
+      }
+    },
     computed: {
       cells(): Cell[] {
         return this.$store.state.board.cells;
@@ -42,7 +49,7 @@
       cursor(): GridCursor {
         return this.$store.state.board.cursor;
       },
-
+      /* @description: Returns the cells nested by nonets  */
       nonets(): Cell[][] {
         const indexedNonets: {[nonet: number]: Cell[]}
           = this.cells.reduce((obj, cell) => ({
@@ -59,5 +66,8 @@
 </script>
 
 <documentation>
-Hello, documentation!
+Hello, documentation 1!
+</documentation>
+<documentation>
+Hello, documentation 2!
 </documentation>
