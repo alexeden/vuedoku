@@ -1,5 +1,7 @@
 <template>
   <div class="flex justify-around fit py3">
+    <!-- @slot Header slot here -->
+    <slot name="header"></slot>
     <div class="col-3">
       <remaining-value-counts/>
     </div>

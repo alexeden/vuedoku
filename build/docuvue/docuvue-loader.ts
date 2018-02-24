@@ -5,6 +5,10 @@ import chalk from 'chalk';
 import * as compiler from 'vue-template-compiler';
 import * as babylon from 'babylon';
 
+import {
+  DocuVueTemplateAnalyzer
+} from './lib/template-analyzer';
+
 const emptySfcBlock: compiler.SFCBlock = {
   type: 'customBlocks',
   content: '',
@@ -20,8 +24,9 @@ const emptySfcDescriptor: Required<compiler.SFCDescriptor> = {
   customBlocks: []
 };
 
+const templateAnalyzer = new DocuVueTemplateAnalyzer();
 
-const DocLoader1: webpack.loader.Loader = function(
+const DocuVueLoader: webpack.loader.Loader = function(
   this: webpack.loader.LoaderContext,
   source: string,
   sourceMap?: RawSourceMap
@@ -42,10 +47,13 @@ const DocLoader1: webpack.loader.Loader = function(
   });
 
   this.emitFile(this.resource.split('/').reverse()[0] + '.json', JSON.stringify(parsed, null, 2), '');
+
+  const slots = templateAnalyzer.getSlots(parts.template.content);
+  console.log(slots);
   return source;
 };
 
-DocLoader1.pitch = function(this: webpack.loader.LoaderContext, remainingRequest, precedingRequest, data) {
+DocuVueLoader.pitch = function(this: webpack.loader.LoaderContext, remainingRequest, precedingRequest, data) {
 };
 
-module.exports = DocLoader1;
+module.exports = DocuVueLoader;
