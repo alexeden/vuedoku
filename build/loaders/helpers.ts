@@ -4,16 +4,16 @@ import * as compiler from 'vue-template-compiler';
 import * as querystring from 'querystring';
 
 interface VueLoaderOptions extends compiler.CompilerOptions {
-  preLoaders: { [lang: string]: string | Object | Array<any> };
-  postLoaders: { [lang: string]: string | Object | Array<any> };
-  loaders: { [lang: string]: string | Object | Array<any> };
-  postcss: object | object[] | Function;
-  cssSourceMap: boolean;
-  esModule: boolean;
-  extractCSS: boolean | Function;
-  preserveWhitespace: boolean;
-  cssModules: {};
-  excludedPreLoaders: RegExp;
+  preLoaders?: { [lang: string]: string };
+  postLoaders?: { [lang: string]: string };
+  loaders?: { [lang: string]: string | Object | Array<any> };
+  postcss?: object | object[] | Function;
+  cssSourceMap?: boolean;
+  esModule?: boolean;
+  extractCSS?: boolean | Function;
+  preserveWhitespace?: boolean;
+  cssModules?: {};
+  excludedPreLoaders?: RegExp;
 }
 
 export class HelperUtils {
@@ -37,6 +37,9 @@ export class HelperUtils {
   }
   static getVueLoaderSelectorPath() {
     return require.resolve('vue-loader/lib/selector');
+  }
+  static getVueLoaderParserPath() {
+    return require.resolve('vue-loader/lib/parser');
   }
   static getVueStyleCompilerPath() {
     return require.resolve('vue-loader/lib/style-compiler');
@@ -74,7 +77,7 @@ export class HelperUtils {
       .join('!');
   }
 
-  static ensureBang (loader) {
+  static ensureBang (loader: string) {
     if (loader.charAt(loader.length - 1) !== '!') {
       return loader + '!';
     } else {
@@ -82,7 +85,7 @@ export class HelperUtils {
     }
   }
 
-  static buildCustomBlockLoaderString (attrs) {
+  static buildCustomBlockLoaderString (attrs: any) {
     const noSrcAttrs = Object.assign({}, attrs);
     delete noSrcAttrs.src;
     const qs = querystring.stringify(noSrcAttrs);
@@ -103,7 +106,7 @@ export class HelperUtils {
       .join('!');
   }
 
-  static getLangString (type, { lang }) {
+  static getLangString (type, { lang }: compiler.SFCBlock) {
     if (type === 'script' || type === 'template' || type === 'styles') {
       return lang || HelperUtils.defaultLang[type];
     } else {
@@ -212,25 +215,25 @@ export class VueLoaderHelpers {
     );
   }
 
-  getRequire (type, part, index, scoped) {
+  getRequire (type, part: compiler.SFCBlock, index = 0, scoped = false) {
     return 'require(' + this.getRequestString(type, part, index, scoped) + ')';
   }
 
-  getImport (type, part, index, scoped) {
+  getImport (type, part: compiler.SFCBlock, index = 0, scoped = false) {
     return (
       'import __vue_' + type + '__ from ' +
       this.getRequestString(type, part, index, scoped)
     );
   }
 
-  getNamedExports (type, part, index, scoped) {
+  getNamedExports (type, part: compiler.SFCBlock, index = 0, scoped = false) {
     return (
       'export * from ' +
       this.getRequestString(type, part, index, scoped)
     );
   }
 
-  getRequestString (type, part, index, scoped) {
+  getRequestString (type, part: compiler.SFCBlock, index = 0, scoped = false) {
     return loaderUtils.stringifyRequest(
       this.loaderContext,
       // disable all configuration loaders
@@ -296,7 +299,7 @@ export class VueLoaderHelpers {
     });
   }
 
-  getLoaderString (type, part, index, scoped) {
+  getLoaderString (type, part: compiler.SFCBlock, index = 0, scoped = false) {
     let loader = this.getRawLoaderString(type, part, index, scoped);
     const lang = HelperUtils.getLangString(type, part);
     const { preLoaders, postLoaders } = this.loaderResolver.resolve();
@@ -309,30 +312,31 @@ export class VueLoaderHelpers {
     return loader;
   }
 
-  getRawLoaderString (type, part, index, scoped) {
+  getRawLoaderString (type, part: compiler.SFCBlock, index = 0, scoped = false) {
     let lang = part.lang || HelperUtils.defaultLang[type];
     const { loaders, defaultLoaders } = this.loaderResolver.resolve();
+    console.log(`${type} loaders: `, loaders);
     let styleCompiler = '';
     if (type === 'styles') {
       // style compiler that needs to be applied for all styles
-      styleCompiler =
-        HelperUtils.getVueStyleCompilerPath() +
-        '?' +
-        JSON.stringify({
-          // a marker for vue-style-loader to know that this is an import from a vue file
-          vue: true,
-          id: this.moduleId,
-          scoped: !!scoped,
-          sourceMap: this.needCssSourceMap
-        }) +
-        '!';
+      const styleCompilerPath = HelperUtils.getVueStyleCompilerPath();
+      const styleCompilerDataString = JSON.stringify({
+        // a marker for vue-style-loader to know that this is an import from a vue file
+        vue: true,
+        id: this.moduleId,
+        scoped: !!scoped,
+        sourceMap: this.needCssSourceMap
+      });
+      styleCompiler = `${styleCompilerPath}?${styleCompilerDataString}!`;
       // normalize scss/sass/postcss if no specific loaders have been provided
       if (!loaders[lang]) {
         if (HelperUtils.postcssExtensions.indexOf(lang) !== -1) {
           lang = 'css';
-        } else if (lang === 'sass') {
+        }
+        else if (lang === 'sass') {
           lang = 'sass?indentedSyntax';
-        } else if (lang === 'scss') {
+        }
+        else if (lang === 'scss') {
           lang = 'sass';
         }
       }
@@ -343,7 +347,7 @@ export class VueLoaderHelpers {
         ? loaders[lang] || this.loaderResolver.getCSSExtractLoader(lang)
         : loaders[lang];
 
-    if (loader !== null) {
+    if (loader != null) { // tslint:disable-line
       if (Array.isArray(loader)) {
         loader = HelperUtils.stringifyLoaders(loader);
       } else if (typeof loader === 'object') {
@@ -366,6 +370,7 @@ export class VueLoaderHelpers {
       if (type === 'template' && loader.indexOf(defaultLoaders.html) < 0) {
         loader = defaultLoaders.html + '!' + loader;
       }
+
       return HelperUtils.ensureBang(loader);
     } else {
       // unknown lang, infer the loader to be used
