@@ -1,14 +1,12 @@
-/// <reference path="./webpack.declarations.d.ts" />
+/// <reference path="./globals.d.ts" />
 import * as webpack from 'webpack';
 import * as path from 'path';
 import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
-import { DocPlugin } from './loaders/doc-plugin';
-const DocLoader = path.resolve(__dirname, 'loaders', 'doc-loader.ts');
-// const DocLoader = path.resolve(__dirname, 'loaders', 'doc-loader.ts');
-const DocLoader1 = path.resolve(__dirname, 'loaders', 'doc-loader-1.ts');
+import { DocuVuePlugin } from './docuvue/docuvue-plugin';
+const DocuVueLoader = path.resolve(__dirname, 'docuvue', 'docuvue-loader.ts');
 
 export const config: webpack.Configuration = {
   target: 'web',
@@ -60,24 +58,9 @@ export const config: webpack.Configuration = {
         use: [
           {
             loader: 'vue-loader',
-            options: {
-              loaders: {
-                // 'documentation': [
-                //   DocLoader
-                // ]
-              }
-            }
-          },
-          {
-            loader: DocLoader1,
-            // loader: 'doc-loader',
             options: {}
-          }
-          // {
-          //   loader: DocLoader1,
-          //   // loader: 'doc-loader',
-          //   options: {}
-          // }
+          },
+          DocuVueLoader
         ]
       },
       {
@@ -120,7 +103,7 @@ export const config: webpack.Configuration = {
 
   plugins: [
 
-    new DocPlugin({
+    new DocuVuePlugin({
       name: 'hi!'
     }),
 

@@ -1,7 +1,7 @@
 import * as webpack from 'webpack';
 
 
-export class DocPlugin implements webpack.Plugin {
+export class DocuVuePlugin implements webpack.Plugin {
   constructor(
     options: any
   ) {
@@ -9,6 +9,6 @@ export class DocPlugin implements webpack.Plugin {
   }
 
   apply(compiler) {
-    console.log(compiler);
+    // console.log(compiler);
   }
 }
