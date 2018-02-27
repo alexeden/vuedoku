@@ -11,8 +11,8 @@
     "build": "npm run clean && webpack --config ./build/webpack.config.ts",
     "build:watch": "nodemon",
     "lint:scss": "stylelint --config .stylelintrc src/**/*.scss",
-    "styleguide:build": "docuvue build --config build/styleguide.config.js", 
-    "styleguide:serve": "docuvue server --config build/styleguide.config.js",
+    "styleguide:build": "docuvue build --config build/docuvue.config.js", 
+    "styleguide:serve": "docuvue server --config build/docuvue.config.js",
     "clean": "rimraf dist",
     "stats": "webpack --config ./build/webpack.config.ts --profile --json > build-stats.json",
     "start": "webpack-dev-server --inline --config ./build/webpack.config.ts"
