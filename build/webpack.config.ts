@@ -18,7 +18,6 @@ export const config: webpack.Configuration = {
       'material-design-icons'
     ],
     styles: [
-      'basscss/css/basscss.css',
       './scss/styles.scss'
     ],
     app: './app.ts'
@@ -65,7 +64,6 @@ export const config: webpack.Configuration = {
           fallback: 'style-loader',
           use: [
             'css-loader',
-            'postcss-loader',
             {
               loader: 'sass-loader',
               options: {

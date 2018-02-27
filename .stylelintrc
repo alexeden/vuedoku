@@ -1,0 +1,20 @@
+# The rules property is an object whose keys are rule names and values are rule configurations.
+# Each rule configuration fits one of the following formats:
+# - a single value (the primary option)
+# - an array with two values ([primary option, secondary options])
+# - null (to turn the rule off)
+extends:
+  - stylelint-config-standard
+plugins:
+  - stylelint-scss
+rules:
+  color-hex-case: null
+  color-hex-length: long
+  number-leading-zero: never
+  at-rule-no-unknown:
+    - true
+    - ignoreAtRules:
+        - each
+        - function
+        - if
+        - return
