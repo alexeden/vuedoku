@@ -1,8 +1,8 @@
 <template>
   <div
     :class="classes"
-    class="clearfix remaining-value-counts-line">
-    <span class="remaining-value-counts-line__value">
+    class="row justify-space-between remaining-value-counts-line">
+    <span class="remaining-value-counts-line__value m-r-40">
       {{value}}
     </span>
     <span class="right">

@@ -1,14 +1,11 @@
-$displays: (
-  -block: block,
-  -flex: flex,
-  -inline: inline,
-  -inline-block: inline-block,
-  -none: none,
-  -grid: grid
-);
+@import 'defaults';
 
-@each $modifier, $value in $displays {
-  .d#{$modifier} {
-    display: $value !important;
+@mixin display-utility-classes(
+  $displays: $default-displays
+) {
+  @each $modifier, $value in $displays {
+    .d#{$modifier} {
+      display: $value !important;
+    }
   }
 }

@@ -18,6 +18,7 @@ export const config: webpack.Configuration = {
       'material-design-icons'
     ],
     styles: [
+      'normalize.css/normalize.css',
       './scss/styles.scss'
     ],
     app: './app.ts'
@@ -68,7 +69,7 @@ export const config: webpack.Configuration = {
               loader: 'sass-loader',
               options: {
                 includePaths: [
-                  path.resolve(process.cwd(), 'node_modules', 'materialize-css')
+                  // path.resolve(process.cwd(), 'node_modules', 'materialize-css')
                 ]
               }
             }

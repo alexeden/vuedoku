@@ -48,6 +48,8 @@
   .no-shrink { flex-shrink: 0 !important; }
   .grow { flex-grow: 1 !important; }
   .shrink { flex-shrink: 1 !important; }
+  .wrap { flex-wrap: wrap !important; }
+  .no-wrap { flex-wrap: nowrap !important; }
 
   @for $x from 0 through 5 {
     .grow-#{$x} {

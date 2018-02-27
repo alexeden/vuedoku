@@ -2,7 +2,7 @@
   <div
     :class="cellCssClasses"
     @click="onCellClick"
-    class="sudoku-cell self-center">
+    class="sudoku-cell align-self-center">
     {{value}}
     <i v-if="locked && zoneSelected" class="material-icons sudoku-cell__lock">lock</i>
   </div>

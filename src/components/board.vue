@@ -1,24 +1,18 @@
 <template>
-  <div class="flex justify-around fit py3">
-    <!-- @slot Header slot here -->
-    <slot name="header"></slot>
-    <div class="col-3">
-      <remaining-value-counts/>
-    </div>
-    <div class="flex max-width-3">
-      <div class="sudoku-board flex flex-wrap">
+  <div class="row fill align-center justify-space-between p-10 gap-20">
+    <remaining-value-counts/>
+    <div class="sudoku-board row wrap">
+      <div
+        v-for="(nonet, nonetIndex) in nonets"
+        :key="nonetIndex"
+        :class="'sudoku-board__nonet--' + nonetIndex"
+        class="no-grow row wrap sudoku-board__nonet">
         <div
-          v-for="(nonet, nonetIndex) in nonets"
-          :key="nonetIndex"
-          :class="'sudoku-board__nonet--' + nonetIndex"
-          class="col-4 flex-wrap flex sudoku-board__nonet">
-          <div
-            v-for="(cell, cellIndex) in nonet"
-            :key="cell.index"
-            :class="'sudoku-board__cell-wrapper--'+cellIndex"
-            class="col-4 flex items-center sudoku-board__cell-wrapper">
-            <cell :cell="cell" v-bind="cell"/>
-          </div>
+          v-for="(cell, cellIndex) in nonet"
+          :key="cell.index"
+          :class="'sudoku-board__cell-wrapper--'+cellIndex"
+          class="no-grow row align-items-center sudoku-board__cell-wrapper">
+          <cell :cell="cell" v-bind="cell"/>
         </div>
       </div>
     </div>
@@ -66,10 +60,3 @@
     }
   });
 </script>
-
-<documentation>
-Hello, documentation 1!
-</documentation>
-<documentation>
-Hello, documentation 2!
-</documentation>

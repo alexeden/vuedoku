@@ -1,5 +1,5 @@
 <template>
-  <div class="remaining-value-counts">
+  <div class="remaining-value-counts column grow">
     <remaining-value-counts-line v-for="n in 9" :key="n" :value="n"/>
     <p>{{totalRemainingValues}} cells left</p>
   </div>

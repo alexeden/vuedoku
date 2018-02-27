@@ -1,22 +1,25 @@
 @charset "UTF-8";
 
 @import "color";
-@import "variables";
-
-$primary-font-family: "Lato";
-
-@import "~materialize-css/sass/components/normalize";
-@import "~materialize-css/sass/components/global";
-@import "typography";
-@import 'utilities/colors';
+// @import "variables";
+@import 'utilities/color';
 @import 'utilities/cursor';
 @import 'utilities/display';
 @import 'utilities/flexbox';
-@import 'utilities/icons';
+@import 'utilities/icon';
 @import 'utilities/position';
 @import 'utilities/spacing';
 @import 'utilities/typography';
 
+@include color-utility-classes();
+@include cursor-utility-classes();
+@include display-utility-classes();
+@include flexbox-utility-classes();
+@include icon-utility-classes();
+@include position-utility-classes();
+@include spacing-utility-classes();
+
+$primary-font-family: "Lato";
 $num-cols: 9;
 $green: #76FF03;
 $cell-error-color: #E53935;
@@ -30,14 +33,27 @@ $cell-selected-background-color: rgba(white, .8);
 $cell-border-color: rgba(255, 255, 255, .2);
 $cell-selected-border-radius: 0%;
 $nonet-border-color: rgba(white, .5);
-$nonet-padding: .5rem;
+$nonet-padding: 0rem;
 $related-selected-background-color: rgba(white, .2);
 $cell-selected-font-color: rgba(0, 0, 0, .6);
 
 @import "remaining-value-counts";
 
+a {
+  text-decoration: none;
+}
+
+html {
+  line-height: 1.5;
+  font-family: $primary-font-family, sans-serif;
+  font-weight: normal;
+  color: $off-black;
+}
+
 .sudoku-board {
   &__nonet {
+    width: 33%;
+    box-sizing: border-box;
     padding: $nonet-padding;
     border: 0 solid $nonet-border-color;
 
@@ -64,7 +80,7 @@ $cell-selected-font-color: rgba(0, 0, 0, .6);
     padding: $cell-padding;
     box-sizing: border-box;
     height: 33%;
-    display: block;
+    width: 33%;
     // border: 0px solid $nonet-border-color;
 
     &--0,
@@ -92,9 +108,10 @@ $cell-selected-font-color: rgba(0, 0, 0, .6);
   font-size: $cell-font-size;
   font-weight: $cell-font-weight;
   height: 100%;
+  width: 100%;
   line-height: 75px;
-  text-align: center;
   position: relative;
+  text-align: center;
   transition: background .5s;
   z-index: 1;
 

@@ -22,6 +22,37 @@ $default-box-directions:
   , y-: top bottom
 );
 
+$default-cursors: (
+  auto,
+  default,
+  none,
+  help,
+  pointer,
+  wait,
+  text,
+  move,
+  not-allowed,
+  col-resize,
+  row-resize,
+  zoom-in,
+  zoom-out,
+  grab,
+  grabbing,
+  n-resize,
+  e-resize,
+  s-resize,
+  w-resize,
+);
+
+$default-displays: (
+  -block: block,
+  -flex: flex,
+  -inline: inline,
+  -inline-block: inline-block,
+  -none: none,
+  -grid: grid
+);
+
 $default-flex-directions: (
   flex:    ( column, margin-bottom ),
   column:  ( column, margin-bottom ),
@@ -41,4 +72,10 @@ $default-flex-alignments: (
   -space-between: space-between,
   -start: flex-start,
   -stretch: stretch
+);
+
+$default-positions: (
+  -absolute: absolute,
+  -fixed: fixed,
+  -relative: relative
 );
