@@ -17,4 +17,6 @@ rules:
         - each
         - function
         - if
+        - else
+        - warn
         - return

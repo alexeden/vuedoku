@@ -1,32 +1,28 @@
 .remaining-value-counts {
-
   color: white;
   font-weight: 100;
   font-size: .9rem;
 
-  &-line, p {
+  &-line,
+  p {
     line-height: 1.2rem;
     padding: .8rem 2rem;
     margin: 0;
   }
 
   &-line {
-    border-bottom: 1px solid rgba(white, 0.2);
+    border-bottom: 1px solid rgba(white, .2);
 
-    &__value {
-    }
-
-
+    // &__value { }
     &--matches-selected {
       color: $cell-selected-font-color;
       font-weight: $cell-selected-font-weight;
       background-color: $related-selected-background-color;
       border-bottom: none;
-
     }
+
     &--complete {
       color: $green;
-
       font-weight: $cell-selected-font-weight;
     }
   }
