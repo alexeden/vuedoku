@@ -14,6 +14,7 @@
   import { GridCursor } from 'sudoku/lib';
 
   export default Vue.extend({
+    name: 'cell',
     props: {
       row: { type: Number, required: true },
       index: { type: Number, required: true },

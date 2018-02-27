@@ -26,6 +26,7 @@
   import RemainingValueCountsComponent from './remaining-value-counts';
 
   export default Vue.extend({
+    name: 'board',
     components: {
       cell: CellComponent,
       remainingValueCounts: RemainingValueCountsComponent

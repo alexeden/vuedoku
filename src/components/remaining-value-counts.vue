@@ -11,6 +11,7 @@
   import RemainingValueCountsLineComponent from './remaining-value-counts-line';
 
   export default Vue.extend({
+    name: 'remainingValueCounts',
     components: {
       remainingValueCountsLine: RemainingValueCountsLineComponent
     },
