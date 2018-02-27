@@ -5,9 +5,6 @@ import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
-import { DocuVuePlugin } from './docuvue/docuvue-plugin';
-const DocuVueLoader = path.resolve(__dirname, 'docuvue', 'docuvue-loader.ts');
-
 export const config: webpack.Configuration = {
   target: 'web',
   context: path.resolve(process.cwd(), 'src'),
@@ -55,13 +52,7 @@ export const config: webpack.Configuration = {
     rules: [
       {
         test: /\.vue$/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {}
-          },
-          DocuVueLoader
-        ]
+        use: 'vue-loader'
       },
       {
         test: /\.html$/,
@@ -102,11 +93,6 @@ export const config: webpack.Configuration = {
   },
 
   plugins: [
-
-    new DocuVuePlugin({
-      name: 'hi!'
-    }),
-
     new HtmlWebpackPlugin({
       template: 'index.html',
       showErrors: true,
