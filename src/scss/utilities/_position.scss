@@ -1,0 +1,20 @@
+$positions: (
+  -absolute: absolute,
+  -fixed: fixed,
+  -relative: relative
+);
+
+@each $modifier, $value in $positions {
+  .pos#{$modifier} {
+    position: $value !important;
+  }
+}
+
+
+.fill {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}

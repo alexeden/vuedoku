@@ -1,0 +1,82 @@
+@import 'variables';
+
+$font-families: (
+  'life-is-okay': 'LifeIsOkay',
+  'roboto': 'Roboto',
+);
+
+@each $modifier, $value in $font-families {
+  .ff-#{$modifier} {
+    font-family: $value !important;
+  }
+}
+
+$text-alignments: (
+  -center: center,
+  -left: left,
+  -right: right,
+  -justify: justify
+);
+
+@each $modifier, $value in $text-alignments {
+  .text#{$modifier} {
+    text-align: $value !important;
+  }
+}
+
+$font-weights: (
+  -light: 300,
+  -normal: 400,
+  -bold: 500
+);
+
+@each $modifier, $value in $font-weights {
+  .fw#{$modifier} {
+    font-weight: $value !important;
+  }
+}
+
+@function typography-level(
+  $font-size,
+  $line-height: $font-size,
+  $font-weight: 400,
+  $font-family: null
+) {
+  @if $font-family == null {
+    $font-family: Roboto;
+  }
+
+  @return (
+    font-size: $font-size,
+    line-height: $line-height,
+    font-weight: $font-weight,
+    font-family: $font-family
+  );
+}
+
+$ape-type-styles: (
+  'display': typography-level(112px, 112px, 300),
+  'title-1': typography-level(56px, 56px, 400),
+  'title-2': typography-level(45px, 48px, 400),
+  'title-3': typography-level(34px, 40px, 400),
+  'title-4': typography-level(24px, 32px, 400),
+  'title-5': typography-level(20px, 32px, 500),
+  'subtitle': typography-level(16px, 28px, 400),
+  'em': typography-level(14px, 24px, 500),
+  'body': typography-level(14px, 20px, 400),
+  'caption': typography-level(12px, 20px, 400),
+  'button': typography-level(14px, 14px, 500)
+);
+
+@each $label, $type-props in $ape-type-styles {
+  // $font-size: map-get($type-props, 1);
+  $line-height: nth($type-props, 2);
+  $font-weight: nth($type-props, 3);
+
+  .type-#{$label} {
+    font-size: map-get($type-props, font-size);
+    font-family: map-get($type-props, font-family);
+    font-weight: map-get($type-props, font-weight);
+    line-height: map-get($type-props, line-height);
+  }
+}

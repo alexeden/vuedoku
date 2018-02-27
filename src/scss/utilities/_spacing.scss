@@ -1,0 +1,25 @@
+@import 'defaults';
+
+@mixin spacing-utility-classes(
+  $box-directions: $default-box-directions,
+  $unit-spacing: $default-unit-spacing,
+  $unit-ratios: $default-unit-ratios
+) {
+  @each $size-label, $ratio in $unit-ratios {
+    $size: $ratio * $unit-spacing;
+
+    @each $dir-label, $dir-props in $box-directions {
+      .m-#{$dir-label}#{$size-label} {
+        @each $dir in $dir-props {
+          margin-#{$dir}: $size !important;
+        }
+      }
+
+      .p-#{$dir-label}#{$size-label} {
+        @each $dir in $dir-props {
+          padding-#{$dir}: $size !important;
+        }
+      }
+    }
+  }
+}

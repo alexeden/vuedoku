@@ -1,0 +1,27 @@
+$cursors: (
+  auto,
+  default,
+  none,
+  help,
+  pointer,
+  wait,
+  text,
+  move,
+  not-allowed,
+  col-resize,
+  row-resize,
+  zoom-in,
+  zoom-out,
+  grab,
+  grabbing,
+  n-resize,
+  e-resize,
+  s-resize,
+  w-resize,
+);
+
+@each $cursor-type in $cursors {
+  .cursor-#{$cursor-type} {
+    cursor: $cursor-type;
+  }
+}

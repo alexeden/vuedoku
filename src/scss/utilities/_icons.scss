@@ -1,0 +1,16 @@
+@import 'defaults';
+
+@mixin icons-utility-classes(
+  $unit-spacing: $default-unit-spacing,
+  $unit-ratios: $default-unit-ratios
+) {
+  @each $size-label, $ratio in $unit-ratios {
+    $size: $ratio * $unit-spacing;
+
+    .icon-#{$size-label} {
+      height: $size !important;
+      width: $size !important;
+      font-size: $size !important;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@import 'defaults';
+
+@mixin flexbox-utility-classes(
+  $flex-directions: $default-flex-directions,
+  $flex-alignments: $default-flex-alignments,
+  $unit-spacing: $default-unit-spacing,
+  $unit-ratios: $default-unit-ratios
+) {
+  @each $class, $props in $flex-directions {
+    $direction: nth($props, 1);
+    $margin: nth($props, 2);
+
+    .#{$class} {
+      display: flex !important;
+      flex-direction: $direction !important;
+
+      @each $size-label, $ratio in $unit-ratios {
+        $size: $ratio * $unit-spacing;
+
+        &.gap-#{$size-label} {
+          & > *:not(:last-child) {
+            #{$margin}: $size; // !important;
+          }
+        }
+      }
+    }
+  }
+
+  @each $modifier, $value in $flex-alignments {
+    .justify#{$modifier} {
+      justify-content: $value !important;
+    }
+
+    .justify-self#{$modifier} {
+      justify-self: $value !important;
+    }
+
+    .align#{$modifier} {
+      align-items: $value !important;
+    }
+
+    .align-self#{$modifier} {
+      align-self: $value !important;
+    }
+  }
+
+  .no-grow { flex-grow: 0 !important; }
+  .no-shrink { flex-shrink: 0 !important; }
+  .grow { flex-grow: 1 !important; }
+  .shrink { flex-shrink: 1 !important; }
+
+  @for $x from 0 through 5 {
+    .grow-#{$x} {
+      flex-grow: $x !important;
+    }
+
+    .shrink-#{$x} {
+      flex-shrink: $x !important;
+    }
+  }
+}

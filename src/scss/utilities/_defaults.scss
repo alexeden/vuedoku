@@ -1,0 +1,44 @@
+$default-unit-spacing: 1rem;
+
+$default-unit-ratios: (
+  0: 0,
+  2: .2,
+  5: .5,
+  10: 1,
+  20: 2,
+  30: 3,
+  40: 4,
+  60: 6,
+  100: 10
+);
+
+$default-box-directions:
+  (#{''}: left right top bottom
+  , l-: left
+  , r-: right
+  , t-: top
+  , b-: bottom
+  , x-: left right
+  , y-: top bottom
+);
+
+$default-flex-directions: (
+  flex:    ( column, margin-bottom ),
+  column:  ( column, margin-bottom ),
+  row:     ( row, margin-right ),
+  column-reverse: ( column-reverse, margin-top ),
+  row-reverse:    ( row-reverse, margin-left ),
+);
+
+$default-flex-alignments: (
+  -baseline: baseline,
+  -center: center,
+  -end: flex-end,
+  -left: flex-start,
+  -right: flex-end,
+  -safe: safe,
+  -space-around: space-around,
+  -space-between: space-between,
+  -start: flex-start,
+  -stretch: stretch
+);
