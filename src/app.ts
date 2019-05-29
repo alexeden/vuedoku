@@ -2,7 +2,7 @@ import Vue from 'vue';
 import { store } from './store';
 import Components from './components';
 
-Vue.filter('join', <T>(list: T[], separator = ' '): string => {
+Vue.filter('join', <T>(list: T[], separator: string = ' '): string => {
   if (!Array.isArray(list)) {
     throw new Error(`The "join" filter expects data to be an Array!`);
   }

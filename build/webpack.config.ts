@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 export const config: webpack.Configuration = {
   target: 'web',
@@ -12,7 +13,8 @@ export const config: webpack.Configuration = {
   devtool: false,
 
   entry: {
-    /* Common */ vendor: [
+    /* Common */
+    vendor: [
       'vue',
       'vuex',
       'material-design-icons'
@@ -40,14 +42,13 @@ export const config: webpack.Configuration = {
     }
   },
 
-  devServer: {
-    host: 'localhost',
-    port: 4000,
-    https: true,
-    historyApiFallback: true,
-    contentBase: [ path.join(process.cwd(), 'src') ]
-  },
-
+  // devServer: {
+  //   host: 'localhost',
+  //   port: 4000,
+  //   https: true,
+  //   historyApiFallback: true,
+  //   contentBase: [ path.join(process.cwd(), 'src') ]
+  // },
   module: {
     rules: [
       {
@@ -61,20 +62,17 @@ export const config: webpack.Configuration = {
       {
         /* Core SCSS files inside /src/scss */
         test: /\.(scss|css)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [
-                  // path.resolve(process.cwd(), 'node_modules', 'materialize-css')
-                ]
-              }
+        use: [
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [
+                // path.resolve(process.cwd(), 'node_modules', 'materialize-css')
+              ]
             }
-          ]
-        })
+          }
+        ]
       },
       {
         test: /\.tsx?$/,
@@ -92,6 +90,7 @@ export const config: webpack.Configuration = {
   },
 
   plugins: [
+    new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.html',
       showErrors: true,
@@ -101,19 +100,12 @@ export const config: webpack.Configuration = {
       title: 'Learning Vuex'
     }),
 
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor'],
-      // tells Webpack we really only want what we specified in the entry
-      minChunks: Infinity
-    }),
+    // new webpack.NamedModulesPlugin(),
+    // new webpack.NamedChunksPlugin(chunk =>
+    //   chunk.name || chunk.mapModules((m: any) => path.relative(m.context, m.request)).join('_')
+    // ),
 
-    new webpack.optimize.CommonsChunkPlugin({ name: 'runtime' }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.NamedChunksPlugin(chunk =>
-      chunk.name || chunk.mapModules((m: any) => path.relative(m.context, m.request)).join('_')
-    ),
-
-    new ExtractTextPlugin({ filename: '[name].css', allChunks: false }),
+    // new ExtractTextPlugin({ filename: '[name].css', allChunks: false }),
     new CircularDependencyPlugin({ exclude: /node_modules/ })
   ]
 };
